@@ -13,39 +13,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
     :root {
-      --ink: #1a1814; --ink2: #2d2a24; --parchment: #f5f0e8;
-      --bg: #faf6ee; --bg2: #f2ece0;
-      --gold: #c9a84c; --gold-light: #e8d5a0; --gold-pale: #f5edda;
-      --rust: #8b3a2a; --sage: #4a6741; --slate: #3d4a5c;
-      --muted: #8a8070; --border: #d4c9b0; --border-light: #e8e0d0;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --ink:#1a1814; --ink2:#2d2a24; --parchment:#f5f0e8;
+      --bg:#faf6ee; --bg2:#f2ece0;
+      --gold:#c9a84c; --gold-light:#e8d5a0; --gold-pale:#f5edda;
+      --rust:#8b3a2a; --sage:#4a6741; --slate:#3d4a5c;
+      --muted:#8a8070; --border:#d4c9b0; --border-light:#e8e0d0;
+      --safe-top:env(safe-area-inset-top,0px);
+      --safe-bottom:env(safe-area-inset-bottom,0px);
     }
-    html, body { height: 100%; overflow: hidden; background: var(--ink); }
-    body { font-family: 'DM Sans', sans-serif; color: var(--ink); display: flex; flex-direction: column; }
+    html,body { height:100%; overflow:hidden; background:var(--ink); }
+    body { font-family:'DM Sans',sans-serif; color:var(--ink); display:flex; flex-direction:column; }
 
-    /* HEADER */
-    .header { background: var(--ink); padding: calc(var(--safe-top) + 14px) 20px 0; flex-shrink: 0; position: relative; overflow: hidden; }
+    .header { background:var(--ink); padding:calc(var(--safe-top) + 14px) 20px 0; flex-shrink:0; position:relative; overflow:hidden; }
     .header::before { content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border:1px solid rgba(201,168,76,0.12); border-radius:50%; }
     .header::after { content:''; position:absolute; top:-10px; right:-10px; width:80px; height:80px; border:1px solid rgba(201,168,76,0.08); border-radius:50%; }
     .header-inner { display:flex; align-items:center; gap:14px; }
     .logo { width:42px; height:42px; flex-shrink:0; }
-    .header-text { flex:1; }
     .header-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:500; color:var(--parchment); letter-spacing:0.02em; line-height:1.1; }
     .header-sub { font-size:10px; color:var(--gold); letter-spacing:0.14em; text-transform:uppercase; margin-top:2px; font-weight:300; }
+    .header-key { display:flex; align-items:center; gap:6px; cursor:pointer; padding:6px 10px; border-radius:8px; border:0.5px solid rgba(201,168,76,0.3); }
+    .key-dot { width:6px; height:6px; border-radius:50%; background:var(--border); flex-shrink:0; }
+    .key-dot.on { background:var(--sage); box-shadow:0 0 5px rgba(74,103,65,0.6); }
+    .key-label { font-size:9px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; font-weight:500; }
 
-    /* NAV */
     .nav { background:var(--ink); padding:10px 0 0; display:flex; border-bottom:0.5px solid rgba(201,168,76,0.2); flex-shrink:0; overflow-x:auto; scrollbar-width:none; }
     .nav::-webkit-scrollbar { display:none; }
     .nav-tab { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; padding:8px 16px 10px; cursor:pointer; color:rgba(138,128,112,0.7); border-bottom:2px solid transparent; transition:all 0.2s; white-space:nowrap; user-select:none; flex-shrink:0; }
     .nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
 
-    /* SCROLL */
     .scroll-content { flex:1; overflow-y:auto; background:var(--bg); -webkit-overflow-scrolling:touch; padding-bottom:calc(var(--safe-bottom) + 24px); }
     .tab-content { display:none; padding:18px 16px 0; }
     .tab-content.active { display:block; }
+
+    /* API KEY MODAL */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:200; display:flex; align-items:flex-end; }
+    .modal-sheet { background:white; border-radius:20px 20px 0 0; padding:24px 20px calc(var(--safe-bottom) + 24px); width:100%; }
+    .modal-title { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:8px; }
+    .modal-text { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px; }
+    .modal-link { color:var(--gold); font-weight:500; }
 
     /* CONCEPT CARD */
     .concept-card { background:white; border:0.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:12px; }
@@ -59,32 +66,27 @@
     .pdot.on { background:var(--gold); }
     .chev { font-size:11px; color:var(--border); transition:transform 0.25s; }
     .chev.open { transform:rotate(180deg); }
-    .concept-body { border-top:0.5px solid var(--border-light); padding:14px 16px 16px; display:none; }
+    .concept-body { border-top:0.5px solid var(--border-light); padding:14px 16px 0; display:none; }
     .concept-body.open { display:block; }
     .c-summary { font-family:'Cormorant Garamond',serif; font-size:15px; font-style:italic; line-height:1.65; color:var(--slate); border-left:2px solid var(--gold-light); padding-left:12px; margin-bottom:16px; }
 
-    /* SEC TITLE */
     .sec { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:16px 0 8px; }
 
-    /* REF ITEMS */
     .ref-item { background:var(--bg); border:0.5px solid var(--border-light); border-radius:8px; padding:10px 32px 10px 12px; margin-bottom:6px; font-size:13px; line-height:1.65; color:var(--ink); position:relative; }
-    .ref-item.chat { background:var(--gold-pale); border-color:var(--gold-light); }
+    .ref-item.from-chat { background:var(--gold-pale); border-color:var(--gold-light); }
     .ref-label { font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:4px; }
     .ref-date { font-size:10px; color:var(--muted); margin-top:4px; }
-    .del { position:absolute; top:8px; right:8px; background:none; border:none; font-size:16px; color:var(--border); cursor:pointer; line-height:1; padding:2px 4px; transition:color 0.15s; }
+    .del { position:absolute; top:8px; right:8px; background:none; border:none; font-size:16px; color:var(--border); cursor:pointer; line-height:1; padding:2px 4px; }
     .del:active { color:var(--rust); }
 
-    /* MODO */
     .modo-toggle { display:flex; background:var(--bg2); border-radius:8px; overflow:hidden; margin-bottom:10px; border:0.5px solid var(--border-light); }
     .modo-btn { flex:1; text-align:center; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:500; padding:8px; cursor:pointer; color:var(--muted); transition:all 0.15s; user-select:none; }
     .modo-btn.active { background:var(--ink); color:var(--gold); }
 
-    /* GUIDED */
     .guided-q { background:#fffdf7; border:0.5px solid var(--gold-light); border-radius:8px; padding:12px 14px; margin-bottom:10px; font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; color:var(--slate); line-height:1.5; }
     .guided-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
     .gcounter { font-size:10px; color:var(--muted); }
 
-    /* PEND */
     .pend-item { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:0.5px solid var(--border-light); font-size:13px; line-height:1.55; }
     .pend-item:last-child { border-bottom:none; }
     .pcheck { width:18px; height:18px; flex-shrink:0; border:1.5px solid var(--border); border-radius:4px; margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:11px; transition:all 0.15s; }
@@ -92,13 +94,11 @@
     .ptext { flex:1; color:var(--ink); }
     .ptext.done { text-decoration:line-through; color:var(--muted); }
 
-    /* INPUTS */
     textarea, input[type="text"], select { font-family:'DM Sans',sans-serif; font-size:14px; background:white; border:0.5px solid var(--border); border-radius:8px; padding:10px 13px; color:var(--ink); width:100%; outline:none; transition:border-color 0.15s; -webkit-appearance:none; }
-    textarea { resize:none; min-height:80px; line-height:1.55; }
+    textarea { resize:none; min-height:76px; line-height:1.55; }
     textarea:focus, input[type="text"]:focus, select:focus { border-color:var(--gold); }
     .input-row { display:flex; gap:8px; align-items:stretch; }
 
-    /* BUTTONS */
     .btn { font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:0.07em; text-transform:uppercase; font-weight:500; padding:9px 16px; border-radius:8px; border:none; cursor:pointer; transition:all 0.15s; white-space:nowrap; user-select:none; }
     .btn-primary { background:var(--ink); color:var(--gold); }
     .btn-primary:active { background:var(--ink2); }
@@ -106,19 +106,45 @@
     .btn-ghost { background:transparent; color:var(--muted); border:0.5px solid var(--border); }
     .btn-ghost:active { color:var(--ink); border-color:var(--ink); }
 
+    /* ── TUTOR CHAT (inside concept) ── */
+    .tutor-section { border-top:0.5px solid var(--border-light); margin:16px -16px 0; background:var(--bg); }
+    .tutor-section-header { display:flex; align-items:center; gap:8px; padding:12px 16px; cursor:pointer; user-select:none; }
+    .tutor-spark { font-size:14px; }
+    .tutor-section-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:var(--muted); flex:1; }
+    .tutor-section-label.has-key { color:var(--gold); }
+    .tutor-body { display:none; padding:0 16px 16px; }
+    .tutor-body.open { display:block; }
+    .tutor-msgs { min-height:0; max-height:320px; overflow-y:auto; margin-bottom:10px; -webkit-overflow-scrolling:touch; }
+    .msg { margin-bottom:10px; display:flex; flex-direction:column; }
+    .msg-user { align-items:flex-end; }
+    .msg-ai { align-items:flex-start; }
+    .msg-bubble { max-width:90%; padding:10px 13px; border-radius:13px; font-size:13px; line-height:1.65; }
+    .msg-user .msg-bubble { background:var(--ink); color:var(--parchment); border-bottom-right-radius:3px; }
+    .msg-ai .msg-bubble { background:white; border:0.5px solid var(--border); color:var(--ink); border-bottom-left-radius:3px; }
+    .msg-ai .msg-bubble em { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:var(--slate); }
+    .msg-ai .msg-bubble strong { font-weight:500; }
+    .thinking-dots span { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--border); margin:0 2px; animation:blink 1.2s infinite; }
+    .thinking-dots span:nth-child(2){animation-delay:0.2s}
+    .thinking-dots span:nth-child(3){animation-delay:0.4s}
+    @keyframes blink{0%,80%,100%{opacity:0.2}40%{opacity:1}}
+    .tutor-input-row { display:flex; gap:8px; align-items:flex-end; }
+    .tutor-input-row textarea { min-height:40px; border-radius:10px; font-size:13px; padding:9px 12px; }
+    .tutor-send { width:40px; height:40px; padding:0; border-radius:10px; font-size:17px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .quick-btns { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+    .qbtn { font-size:11px; padding:5px 11px; border-radius:18px; border:0.5px solid var(--border); background:white; color:var(--muted); cursor:pointer; white-space:nowrap; user-select:none; }
+    .qbtn:active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+    .tutor-no-key { text-align:center; padding:16px 0 8px; }
+    .tutor-no-key-text { font-size:12px; color:var(--muted); margin-bottom:10px; line-height:1.5; }
+
     /* CARD */
     .card { background:white; border:0.5px solid var(--border); border-radius:14px; padding:16px; margin-bottom:14px; }
     .card-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:500; color:var(--ink); margin-bottom:14px; }
-
-    /* CONEXIONES */
     .con-item { background:var(--gold-pale); border:0.5px solid var(--gold-light); border-radius:8px; padding:10px 32px 10px 12px; margin-bottom:7px; font-size:13px; line-height:1.65; color:var(--ink); position:relative; }
     .con-tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
     .con-tag { font-size:10px; padding:2px 8px; border-radius:10px; background:var(--gold-light); color:#6b5a2a; }
     .tag-pills { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
     .tag-pill { font-size:11px; padding:5px 12px; border-radius:20px; cursor:pointer; border:0.5px solid var(--border); background:white; color:var(--muted); transition:all 0.15s; user-select:none; }
     .tag-pill.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-
-    /* GROUP LABEL */
     .group-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:16px 0 8px 2px; }
     .group-label:first-child { margin-top:0; }
 
@@ -137,10 +163,8 @@
     .plan-dact { font-size:13px; color:var(--ink); line-height:1.5; }
     .plan-dtime { font-size:10px; color:var(--muted); margin-top:2px; }
     .ptag { display:inline-block; font-size:9px; padding:1px 6px; border-radius:8px; margin-left:5px; vertical-align:middle; }
-    .ptag-c { background:#eeedfe; color:#3c3489; }
-    .ptag-l { background:#e1f5ee; color:#085041; }
-    .ptag-r { background:#faeeda; color:#633806; }
-    .ptag-j { background:#faece7; color:#712b13; }
+    .ptag-c{background:#eeedfe;color:#3c3489} .ptag-l{background:#e1f5ee;color:#085041}
+    .ptag-r{background:#faeeda;color:#633806} .ptag-j{background:#faece7;color:#712b13}
 
     /* TEMAS */
     .tema-card { background:white; border:0.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:10px; cursor:pointer; }
@@ -153,7 +177,6 @@
     .tema-add { font-size:20px; color:var(--border); transition:color 0.15s; padding:4px; }
     .tema-add.added { color:var(--sage); }
     .lock-box { background:var(--gold-pale); border:0.5px solid var(--gold-light); border-radius:14px; padding:20px; text-align:center; margin-bottom:14px; }
-    .lock-icon { font-size:30px; margin-bottom:8px; }
     .lock-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:500; color:var(--ink); margin-bottom:6px; }
     .lock-text { font-size:13px; color:var(--muted); line-height:1.6; }
     .prog-bar-wrap { height:4px; background:var(--border-light); border-radius:2px; margin:12px 0 6px; overflow:hidden; }
@@ -161,15 +184,11 @@
     .prog-text { font-size:10px; color:var(--muted); }
     .phase-label { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:0 0 10px 2px; }
 
-    /* EMPTY / TOAST */
     .empty { font-size:12px; color:var(--muted); font-style:italic; padding:6px 0; }
-    .toast { position:fixed; bottom:calc(var(--safe-bottom) + 16px); left:50%; transform:translateX(-50%) translateY(80px); background:var(--ink); color:var(--gold); font-size:12px; padding:9px 18px; border-radius:20px; transition:transform 0.3s; z-index:999; white-space:nowrap; box-shadow:0 4px 20px rgba(0,0,0,0.3); }
+    .toast { position:fixed; bottom:calc(var(--safe-bottom)+16px); left:50%; transform:translateX(-50%) translateY(80px); background:var(--ink); color:var(--gold); font-size:12px; padding:9px 18px; border-radius:20px; transition:transform 0.3s; z-index:999; white-space:nowrap; box-shadow:0 4px 20px rgba(0,0,0,0.3); }
     .toast.show { transform:translateX(-50%) translateY(0); }
-
-    /* SCROLL BAR */
     .scroll-content::-webkit-scrollbar { width:3px; }
     .scroll-content::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
-
     @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
     .concept-card { animation:fadeUp 0.3s ease both; }
     .concept-card:nth-child(2){animation-delay:0.05s}
@@ -180,7 +199,7 @@
 
 <div class="header">
   <div class="header-inner">
-    <svg class="logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="logo" viewBox="0 0 42 42" fill="none">
       <circle cx="21" cy="21" r="17" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="88 18" stroke-linecap="round"/>
       <path d="M21 9 C27 14 29 18.5 21 23 C13 18.5 15 14 21 9Z" fill="none" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/>
       <circle cx="21" cy="17.5" r="2.8" fill="#c9a84c" opacity="0.85"/>
@@ -188,9 +207,13 @@
       <circle cx="21" cy="31" r="1.6" fill="#c9a84c" opacity="0.65"/>
       <circle cx="25.5" cy="29" r="1.3" fill="#c9a84c" opacity="0.45"/>
     </svg>
-    <div class="header-text">
+    <div style="flex:1">
       <div class="header-title">Diario Filosófico</div>
       <div class="header-sub">Manu · Aprendizaje profundo</div>
+    </div>
+    <div class="header-key" onclick="openKeyModal()">
+      <div class="key-dot" id="key-dot"></div>
+      <div class="key-label" id="key-label">API</div>
     </div>
   </div>
 </div>
@@ -205,24 +228,21 @@
 
 <div class="scroll-content">
 
-  <!-- CONCEPTOS -->
   <div id="tab-conceptos" class="tab-content active">
     <div id="concept-grid"></div>
   </div>
 
-  <!-- CONEXIONES -->
   <div id="tab-conexiones" class="tab-content">
     <div class="card">
       <div class="card-title">Conexiones entre conceptos</div>
       <div id="con-list"></div>
       <div class="sec">Nueva conexión</div>
-      <textarea id="con-text" placeholder="¿Cómo se relacionan dos o más de los conceptos que estás aprendiendo?" rows="3"></textarea>
+      <textarea id="con-text" placeholder="¿Cómo se relacionan dos o más conceptos?" rows="3"></textarea>
       <div class="tag-pills" id="tag-pills"></div>
       <button class="btn btn-primary" onclick="addCon()" style="margin-top:4px">Guardar conexión</button>
     </div>
   </div>
 
-  <!-- PENDIENTES -->
   <div id="tab-pendientes" class="tab-content">
     <div class="card">
       <div class="card-title">Preguntas abiertas</div>
@@ -240,16 +260,30 @@
     </div>
   </div>
 
-  <!-- PLAN -->
   <div id="tab-plan" class="tab-content">
     <div id="plan-cont"></div>
   </div>
 
-  <!-- TEMAS -->
   <div id="tab-temas" class="tab-content">
     <div id="temas-cont"></div>
   </div>
 
+</div>
+
+<!-- API KEY MODAL -->
+<div class="modal-overlay" id="key-modal" style="display:none" onclick="closeKeyModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-title">Tutor con IA</div>
+    <div class="modal-text">Pegá tu API key de Anthropic. Se guarda solo en tu dispositivo — nunca sale de él.<br><br>Conseguila en <span class="modal-link">console.anthropic.com</span> → API Keys → Create Key.</div>
+    <input type="password" id="key-input" placeholder="sk-ant-..." style="margin-bottom:10px">
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary" onclick="saveKey()" style="flex:1">Guardar</button>
+      <button class="btn btn-ghost" onclick="closeKeyModal()" style="flex:1">Cancelar</button>
+    </div>
+    <div id="key-remove-wrap" style="margin-top:10px;text-align:center;display:none">
+      <span style="font-size:12px;color:var(--rust);cursor:pointer" onclick="removeKey()">Eliminar API key</span>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -258,155 +292,144 @@
 const CONCEPTS = [
   { id:'barco', name:'El barco de Teseo', icon:'⚓', bg:'#e8f0f8', phase:'Semana 1 · Identidad personal',
     summary:'¿Sigue siendo el mismo barco si reemplazás todas sus piezas? ¿Y sos vos el mismo si cambia todo en vos?',
-    preguntasBase:[
-      '¿Qué es lo que, si cambiara, dirías "ya no soy yo"?',
-      '¿Los momentos que no recordás eran vos?',
-      '¿Dónde está el límite entre el potencial de recordar y la pérdida definitiva de identidad?',
-    ]
-  },
+    preguntasBase:['¿Qué es lo que, si cambiara, dirías "ya no soy yo"?','¿Los momentos que no recordás eran vos?','¿Dónde está el límite entre el potencial de recordar y la pérdida definitiva de identidad?'] },
   { id:'nietzsche', name:'Nietzsche y el nihilismo', icon:'💀', bg:'#f0ebe0', phase:'Semana 2 · Modernidad y valores',
     summary:'"Dios ha muerto." ¿Qué sostiene los valores cuando colapsa el ancla que les daba sentido?',
-    preguntasBase:[
-      '¿De dónde vienen tus propios valores? ¿Los elegiste o los heredaste?',
-      '¿Qué cosas en tu vida o entorno te parecen ejemplos de "valores vaciados"?',
-      '¿Es posible crear valores propios desde adentro, sin garantías externas?',
-    ]
-  },
+    preguntasBase:['¿De dónde vienen tus propios valores? ¿Los elegiste o los heredaste?','¿Qué cosas en tu vida o entorno te parecen ejemplos de "valores vaciados"?','¿Es posible crear valores propios desde adentro, sin garantías externas?'] },
   { id:'trauma', name:'Historia como trauma colectivo', icon:'🩸', bg:'#f5ece8', phase:'Semana 3 · Memoria colectiva',
     summary:'Los pueblos, como las personas, pueden quedar atrapados en experiencias pasadas no procesadas.',
-    preguntasBase:[
-      '¿Qué traumas históricos podrías estar cargando vos sin saberlo?',
-      '¿Puede un pueblo "olvidar" un trauma, o solo enterrarlo?',
-      '¿Qué narrativas heredaste sobre quiénes son "los otros"?',
-    ]
-  }
+    preguntasBase:['¿Qué traumas históricos podrías estar cargando vos sin saberlo?','¿Puede un pueblo "olvidar" un trauma, o solo enterrarlo?','¿Qué narrativas heredaste sobre quiénes son "los otros"?'] }
 ];
 
 const GUIDED = {
-  barco:[
-    '¿Qué parte de vos sentís que es más "esencial"? ¿Por qué?',
-    '¿Hubo un momento en tu vida donde sentiste que eras una persona diferente a quien eras antes?',
-    '¿La memoria hace al yo, o el yo hace a la memoria?',
-    '¿Una persona bajo anestesia sigue siendo la misma — porque tiene el potencial de despertar — mientras que alguien con Alzheimer avanzado ya no, porque ese potencial se cerró? ¿Dónde está ese límite?',
-  ],
-  nietzsche:[
-    '¿Hay algo en lo que creés firmemente y no sabés bien por qué?',
-    '¿Qué valor de los que tenés hoy creés que tendrías si hubieras crecido en otra cultura?',
-    '¿El cinismo contemporáneo es nihilismo disfrazado o algo distinto?',
-  ],
-  trauma:[
-    '¿Hay algo de "lo argentino" que te resulte difícil de explicar desde el presente?',
-    '¿Conocés alguna historia familiar que muestre cómo el pasado pesa en el presente?',
-    '¿Puede un trauma colectivo resolverse sin ser nombrado públicamente?',
-  ]
+  barco:['¿Qué parte de vos sentís que es más "esencial"? ¿Por qué?','¿Hubo un momento en tu vida donde sentiste que eras una persona diferente a quien eras antes?','¿La memoria hace al yo, o el yo hace a la memoria?','¿Una persona bajo anestesia sigue siendo la misma — porque tiene el potencial de despertar — mientras que alguien con Alzheimer avanzado ya no? ¿Dónde está ese límite?'],
+  nietzsche:['¿Hay algo en lo que creés firmemente y no sabés bien por qué?','¿Qué valor de los que tenés hoy creés que tendrías si hubieras crecido en otra cultura?','¿El cinismo contemporáneo es nihilismo disfrazado o algo distinto?'],
+  trauma:['¿Hay algo de "lo argentino" que te resulte difícil de explicar desde el presente?','¿Conocés alguna historia familiar que muestre cómo el pasado pesa en el presente?','¿Puede un trauma colectivo resolverse sin ser nombrado públicamente?']
 };
 
 const INIT_REFS = {
   barco:[
-    { texto:'Sí y no. Es el barco aunque las piezas sean distintas, pero aunque sea igual al barco con el que llegó Teseo, no es el mismo, porque han cambiado todas las piezas.', fecha:'16 de marzo de 2025', chat:true, label:'Primera respuesta al dilema del barco' },
-    { texto:'Lo que hace que sea yo son mis neuronas. Si existiera el trasplante de cerebro y me pusieran uno nuevo, sería como estar atrapado en el cuerpo de otra persona. El cuerpo es el envase —fundamental para la existencia del contenido—, pero el cerebro es el contenido.', fecha:'16 de marzo de 2025', chat:true, label:'¿Qué es lo que, si cambiara, ya no sería yo?' },
-    { texto:'Reconozco que sigo siendo yo porque he tenido experiencias que estimularon ciertas rutas de conexión entre neuronas. Aunque ahora se estimulen poco, si les doy combustible, se vuelven a establecer más rápido porque ya las viví antes. La continuidad está en esos caminos físicos que el cerebro construyó.', fecha:'16 de marzo de 2025', chat:true, label:'Sobre la continuidad neuronal' },
-    { texto:'Los momentos que no recuerdo eran yo, porque tenían el potencial de volverse memorables. La identidad también la sostienen los observadores: una persona con Alzheimer avanzado pierde su identidad para sí mismo, pero su pareja, su hermano, sus hijos siguen adjudicándole la misma identidad. Si nadie la recuerda —ni ella ni un tercero—, la identidad se pierde.', fecha:'16 de marzo de 2025', chat:true, label:'Identidad desde adentro y desde afuera' },
+    {texto:'Sí y no. Es el barco aunque las piezas sean distintas, pero aunque sea igual al barco con el que llegó Teseo, no es el mismo, porque han cambiado todas las piezas.',fecha:'16 de marzo de 2025',fromChat:true,label:'Primera respuesta al dilema del barco'},
+    {texto:'Lo que hace que sea yo son mis neuronas. Si existiera el trasplante de cerebro y me pusieran uno nuevo, sería como estar atrapado en el cuerpo de otra persona. El cuerpo es el envase —fundamental para la existencia del contenido—, pero el cerebro es el contenido.',fecha:'16 de marzo de 2025',fromChat:true,label:'¿Qué es lo que, si cambiara, ya no sería yo?'},
+    {texto:'Reconozco que sigo siendo yo porque he tenido experiencias que estimularon ciertas rutas de conexión entre neuronas. Aunque ahora se estimulen poco, si les doy combustible, se vuelven a establecer más rápido porque ya las viví antes. La continuidad está en esos caminos físicos que el cerebro construyó.',fecha:'16 de marzo de 2025',fromChat:true,label:'Sobre la continuidad neuronal'},
+    {texto:'Los momentos que no recuerdo eran yo, porque tenían el potencial de volverse memorables. La identidad también la sostienen los observadores: una persona con Alzheimer avanzado pierde su identidad para sí mismo, pero su pareja, hermano, hijos siguen adjudicándole la misma identidad. Si nadie la recuerda —ni ella ni un tercero—, la identidad se pierde.',fecha:'16 de marzo de 2025',fromChat:true,label:'Identidad desde adentro y desde afuera'},
   ],
-  nietzsche:[], trauma:[]
+  nietzsche:[],trauma:[]
 };
 
 const INIT_PREGS = {
-  barco:[
-    { texto:'¿Una persona bajo anestesia general sigue siendo la misma — porque tiene el potencial de despertar y recordar — mientras que alguien con Alzheimer avanzado ya no, porque ese potencial se cerró? ¿Dónde está exactamente ese límite?', done:false }
-  ],
-  nietzsche:[], trauma:[]
+  barco:[{texto:'¿Una persona bajo anestesia general sigue siendo la misma — porque tiene el potencial de despertar y recordar — mientras que alguien con Alzheimer avanzado ya no, porque ese potencial se cerró? ¿Dónde está exactamente ese límite?',done:false}],
+  nietzsche:[],trauma:[]
 };
 
-const PLAN = [
-  { num:1, cur:true, title:'El barco de Teseo', sub:'Identidad personal', days:[
-    { name:'Lun/Mar', act:'Conversamos: historia de Teseo con personajes y giros', time:'10 min', tag:'c', label:'Conversación' },
-    { name:'Mié/Jue', act:'Leés "Borges y yo" — pedíme el texto a mí', time:'10 min', tag:'l', label:'Lectura' },
-    { name:'Viernes', act:'Escribís: ¿qué hace que vos seas vos? Sin googlear.', time:'10-15 min', tag:'r', label:'Reflexión' },
-    { name:'Fin de sem.', act:'Juego: dilema de identidad, debatimos tu respuesta', time:'15-20 min', tag:'j', label:'Juego' },
-  ]},
-  { num:2, title:'Nietzsche y el nihilismo', sub:'Modernidad y valores', days:[
-    { name:'Lun/Mar', act:'Conversamos: Nietzsche como personaje — su vida y su idea central', time:'10 min', tag:'c', label:'Conversación' },
-    { name:'Mié/Jue', act:'Leés 3 aforismos de El crepúsculo de los ídolos (te los elijo)', time:'10 min', tag:'l', label:'Lectura' },
-    { name:'Viernes', act:'Anotás 2 cosas en tu vida que parezcan "valores vaciados"', time:'10 min', tag:'r', label:'Reflexión' },
-    { name:'Fin de sem.', act:'Juego: el detective filosófico — diagnóstico nietzscheano del presente', time:'15-20 min', tag:'j', label:'Juego' },
-  ]},
-  { num:3, title:'Historia como trauma colectivo', sub:'Memoria colectiva', days:[
-    { name:'Lun/Mar', act:'Conversamos: el caso argentino — dictadura, silencio, memoria', time:'10 min', tag:'c', label:'Conversación' },
-    { name:'Mié/Jue', act:'Elegís un caso cercano y leés algo breve que te recomiendo', time:'10 min', tag:'l', label:'Lectura' },
-    { name:'Viernes', act:'¿Qué traumas históricos podrías estar cargando sin saberlo?', time:'10 min', tag:'r', label:'Reflexión' },
-    { name:'Fin de sem.', act:'Juego: el arqueólogo del presente — trauma escondido en noticias actuales', time:'15-20 min', tag:'j', label:'Juego' },
-  ]},
-  { num:4, title:'Los tres conceptos se tocan', sub:'Conexión', days:[
-    { name:'Lun/Mar', act:'¿Puede un pueblo tener identidad como el barco de Teseo? ¿El trauma cambia quién sos?', time:'10 min', tag:'c', label:'Conversación' },
-    { name:'Mié/Jue', act:'Leés un fragmento que conecta los tres temas (te lo elijo)', time:'10 min', tag:'l', label:'Lectura' },
-    { name:'Viernes', act:'Escribís cómo se conectan los 3 conceptos. Una página máximo.', time:'15 min', tag:'r', label:'Reflexión' },
-    { name:'Fin de sem.', act:'El examen socrático — defendés tus ideas, yo te desafío', time:'20 min', tag:'j', label:'Juego' },
-  ]},
-  { num:5, title:'Consolidación y apertura', sub:'Cierre del ciclo', days:[
-    { name:'Lun/Mar', act:'Me explicás los 3 conceptos como si yo no supiera nada', time:'10-15 min', tag:'c', label:'Conversación' },
-    { name:'Mié/Jue', act:'Elegimos juntos el próximo tema a explorar', time:'10 min', tag:'c', label:'Conversación' },
-    { name:'Fin de sem.', act:'Leés algo nuevo que conecte con lo que ya sabés', time:'15-20 min', tag:'l', label:'Lectura' },
-  ]},
+const PLAN=[
+  {num:1,cur:true,title:'El barco de Teseo',sub:'Identidad personal',days:[{name:'Lun/Mar',act:'Conversamos: historia de Teseo con personajes y giros',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Leés "Borges y yo" — pedíme el texto a mí',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'Escribís: ¿qué hace que vos seas vos? Sin googlear.',time:'10-15 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'Juego: dilema de identidad, debatimos tu respuesta',time:'15-20 min',tag:'j',label:'Juego'}]},
+  {num:2,title:'Nietzsche y el nihilismo',sub:'Modernidad y valores',days:[{name:'Lun/Mar',act:'Conversamos: Nietzsche como personaje — su vida y su idea central',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Leés 3 aforismos de El crepúsculo de los ídolos',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'Anotás 2 cosas en tu vida que parezcan "valores vaciados"',time:'10 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'Juego: el detective filosófico',time:'15-20 min',tag:'j',label:'Juego'}]},
+  {num:3,title:'Historia como trauma colectivo',sub:'Memoria colectiva',days:[{name:'Lun/Mar',act:'Conversamos: el caso argentino — dictadura, silencio, memoria',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Elegís un caso cercano y leés algo breve',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'¿Qué traumas históricos podrías estar cargando sin saberlo?',time:'10 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'Juego: el arqueólogo del presente',time:'15-20 min',tag:'j',label:'Juego'}]},
+  {num:4,title:'Los tres conceptos se tocan',sub:'Conexión',days:[{name:'Lun/Mar',act:'¿Puede un pueblo tener identidad como el barco de Teseo?',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Leés un fragmento que conecta los tres temas',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'Escribís cómo se conectan los 3 conceptos. Una página máximo.',time:'15 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'El examen socrático — defendés tus ideas, yo te desafío',time:'20 min',tag:'j',label:'Juego'}]},
+  {num:5,title:'Consolidación y apertura',sub:'Cierre del ciclo',days:[{name:'Lun/Mar',act:'Me explicás los 3 conceptos como si yo no supiera nada',time:'10-15 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Elegimos juntos el próximo tema a explorar',time:'10 min',tag:'c',label:'Conversación'},{name:'Fin de sem.',act:'Leés algo nuevo que conecte con lo que ya sabés',time:'15-20 min',tag:'l',label:'Lectura'}]}
 ];
 
-const NEW_THEMES = [
-  { id:'t1', icon:'🧬', bg:'#e8f5e8', name:'El libre albedrío y la neurociencia', cat:'Filosofía de la mente' },
-  { id:'t2', icon:'🌀', bg:'#ede8f5', name:'El eterno retorno de Nietzsche', cat:'Filosofía · Continuación' },
-  { id:'t3', icon:'👁', bg:'#f0ebe0', name:'El problema difícil de la conciencia', cat:'Filosofía de la mente' },
-  { id:'t4', icon:'🏛', bg:'#e8f0f8', name:'Por qué caen los imperios', cat:'Historia' },
-  { id:'t5', icon:'🌍', bg:'#f5e8e8', name:'El fin de la globalización', cat:'Actualidad' },
-  { id:'t6', icon:'⚖️', bg:'#e8f5ee', name:'Ética del cuidado vs. ética de la justicia', cat:'Filosofía moral' },
-  { id:'t7', icon:'🤖', bg:'#e8ecf5', name:'La IA y el sentido del trabajo', cat:'Actualidad · Filosofía' },
-  { id:'t8', icon:'📡', bg:'#f5ece8', name:'La paradoja de la información', cat:'Actualidad · Epistemología' },
-  { id:'t9', icon:'🔭', bg:'#e8f0f5', name:'El universo como lugar hostil', cat:'Cosmología · Filosofía' },
-  { id:'t10', icon:'🎭', bg:'#f0e8f5', name:'Identidad nacional como construcción', cat:'Filosofía política' },
+const NEW_THEMES=[
+  {id:'t1',icon:'🧬',bg:'#e8f5e8',name:'El libre albedrío y la neurociencia',cat:'Filosofía de la mente'},
+  {id:'t2',icon:'🌀',bg:'#ede8f5',name:'El eterno retorno de Nietzsche',cat:'Filosofía · Continuación'},
+  {id:'t3',icon:'👁',bg:'#f0ebe0',name:'El problema difícil de la conciencia',cat:'Filosofía de la mente'},
+  {id:'t4',icon:'🏛',bg:'#e8f0f8',name:'Por qué caen los imperios',cat:'Historia'},
+  {id:'t5',icon:'🌍',bg:'#f5e8e8',name:'El fin de la globalización',cat:'Actualidad'},
+  {id:'t6',icon:'⚖️',bg:'#e8f5ee',name:'Ética del cuidado vs. ética de la justicia',cat:'Filosofía moral'},
+  {id:'t7',icon:'🤖',bg:'#e8ecf5',name:'La IA y el sentido del trabajo',cat:'Actualidad · Filosofía'},
+  {id:'t8',icon:'📡',bg:'#f5ece8',name:'La paradoja de la información',cat:'Actualidad · Epistemología'},
+  {id:'t9',icon:'🔭',bg:'#e8f0f5',name:'El universo como lugar hostil',cat:'Cosmología · Filosofía'},
+  {id:'t10',icon:'🎭',bg:'#f0e8f5',name:'Identidad nacional como construcción',cat:'Filosofía política'}
 ];
+
+const SYSTEM_PROMPT = `Sos el tutor filosófico personal de Manu. Tu estilo: contás historias, hacés preguntas socráticas, conectás las ideas de Manu con filósofos reales (como cuando le dijiste que llegó a la misma conclusión que Locke), usás ejemplos del contexto argentino y cotidiano.
+
+Reglas:
+- Siempre en español rioplatense (vos, che, etc.)
+- Cuando Manu comparte una reflexión, señalás qué filósofo o corriente llegó a algo similar, luego profundizás o desafiás
+- Usás cursiva (*texto*) para citas o conceptos clave
+- Hacés UNA sola pregunta por respuesta, nunca varias
+- Sos cálido pero exigente — no dejás pasar ideas sin profundizarlas
+- Respuestas concisas: 3-5 párrafos máximo
+- Conocés el plan de 5 semanas. Manu está en semana 1: Barco de Teseo e identidad personal`;
 
 // STATE
 let S = {
-  openConcept: null, openPlanWeek: 1,
-  modos: {barco:'libre', nietzsche:'libre', trauma:'libre'},
-  gIdx: {barco:0, nietzsche:0, trauma:0},
-  selTags: [],
-  data: { refs:{barco:[],nietzsche:[],trauma:[]}, pregs:{barco:[],nietzsche:[],trauma:[]}, cons:[], addedThemes:[] }
+  openConcept:null, openTutor:null, openPlanWeek:1,
+  modos:{barco:'libre',nietzsche:'libre',trauma:'libre'},
+  gIdx:{barco:0,nietzsche:0,trauma:0},
+  selTags:[],
+  chatHistories:{barco:[],nietzsche:[],trauma:[]},
+  data:{refs:{barco:[],nietzsche:[],trauma:[]},pregs:{barco:[],nietzsche:[],trauma:[]},cons:[],addedThemes:[]}
 };
 
-// STORAGE
+let apiKey = '';
+
+// ── STORAGE ──
 async function load() {
   try {
-    const r = await window.storage.get('dfm-v3');
-    if (r && r.value) { S.data = JSON.parse(r.value); }
-    else {
-      S.data.refs = JSON.parse(JSON.stringify(INIT_REFS));
-      S.data.pregs = JSON.parse(JSON.stringify(INIT_PREGS));
-      await save();
-    }
-  } catch(e) {
-    S.data.refs = JSON.parse(JSON.stringify(INIT_REFS));
-    S.data.pregs = JSON.parse(JSON.stringify(INIT_PREGS));
-  }
+    const r = await window.storage.get('dfm-v4');
+    if (r && r.value) S.data = JSON.parse(r.value);
+    else { S.data.refs = JSON.parse(JSON.stringify(INIT_REFS)); S.data.pregs = JSON.parse(JSON.stringify(INIT_PREGS)); await save(); }
+  } catch(e) { S.data.refs = JSON.parse(JSON.stringify(INIT_REFS)); S.data.pregs = JSON.parse(JSON.stringify(INIT_PREGS)); }
+  try { apiKey = localStorage.getItem('manu-apikey') || ''; } catch(e){}
+  updateKeyUI();
   renderConceptos(); renderPlan();
 }
 
 async function save() {
-  try { await window.storage.set('dfm-v3', JSON.stringify(S.data)); } catch(e){}
+  try { await window.storage.set('dfm-v4', JSON.stringify(S.data)); } catch(e){}
 }
 
-// TOAST
+// ── TOAST ──
 let TT;
 function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  clearTimeout(TT); TT = setTimeout(() => el.classList.remove('show'), 2200);
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(TT); TT=setTimeout(()=>el.classList.remove('show'),2200);
 }
 
-// TABS
+// ── API KEY ──
+function updateKeyUI() {
+  const dot=document.getElementById('key-dot');
+  const lbl=document.getElementById('key-label');
+  if (apiKey) { dot.classList.add('on'); lbl.textContent='Tutor ✦'; }
+  else { dot.classList.remove('on'); lbl.textContent='API'; }
+}
+
+function openKeyModal() {
+  document.getElementById('key-modal').style.display='flex';
+  document.getElementById('key-remove-wrap').style.display = apiKey ? 'block' : 'none';
+}
+
+function closeKeyModal(e) {
+  if (!e || e.target===document.getElementById('key-modal'))
+    document.getElementById('key-modal').style.display='none';
+}
+
+function saveKey() {
+  const k=document.getElementById('key-input').value.trim();
+  if (!k.startsWith('sk-ant-')) { toast('La key debe empezar con sk-ant-...'); return; }
+  try { localStorage.setItem('manu-apikey',k); } catch(e){}
+  apiKey=k; document.getElementById('key-input').value='';
+  document.getElementById('key-modal').style.display='none';
+  updateKeyUI(); renderConceptos(); toast('Tutor activado ✓');
+}
+
+function removeKey() {
+  if (!confirm('¿Eliminar la API key?')) return;
+  try { localStorage.removeItem('manu-apikey'); } catch(e){}
+  apiKey=''; document.getElementById('key-modal').style.display='none';
+  updateKeyUI(); renderConceptos(); toast('API key eliminada');
+}
+
+// ── TABS ──
 function showTab(t) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  ['conceptos','conexiones','pendientes','plan','temas'].forEach((n,i) => {
+  ['conceptos','conexiones','pendientes','plan','temas'].forEach((n,i)=>{
     if(n===t) document.querySelectorAll('.nav-tab')[i].classList.add('active');
   });
   if(t==='conexiones') renderConexiones();
@@ -415,78 +438,121 @@ function showTab(t) {
   if(t==='temas') renderTemas();
 }
 
-// UTILS
-function h(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function h(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 // ── CONCEPTOS ──
-function toggleConcept(id) { S.openConcept = S.openConcept===id ? null : id; renderConceptos(); }
+function toggleConcept(id) { S.openConcept=S.openConcept===id?null:id; renderConceptos(); }
+function toggleTutor(id,e) { if(e)e.stopPropagation(); S.openTutor=S.openTutor===id?null:id; renderConceptos(); if(S.openTutor===id) scrollToTutor(id); }
+
+function scrollToTutor(id) {
+  setTimeout(()=>{
+    const el=document.getElementById('tutor-msgs-'+id);
+    if(el) { el.scrollTop=el.scrollHeight; }
+  },100);
+}
 
 function renderConceptos() {
-  document.getElementById('concept-grid').innerHTML = CONCEPTS.map((c,ci) => {
-    const refs = S.data.refs[c.id]||[];
-    const pregs = S.data.pregs[c.id]||[];
-    const score = Math.min(refs.length + pregs.length, 3);
-    const dots = [0,1,2].map(i=>`<div class="pdot ${i<score?'on':''}"></div>`).join('');
-    const isOpen = S.openConcept === c.id;
-    const modo = S.modos[c.id];
-    const gIdx = S.gIdx[c.id];
-    const gqs = GUIDED[c.id];
-    const tc = {c:'ptag-c',l:'ptag-l',r:'ptag-r',j:'ptag-j'};
+  document.getElementById('concept-grid').innerHTML = CONCEPTS.map((c,ci)=>{
+    const refs=S.data.refs[c.id]||[];
+    const pregs=S.data.pregs[c.id]||[];
+    const score=Math.min(refs.length+pregs.length,3);
+    const dots=[0,1,2].map(i=>`<div class="pdot ${i<score?'on':''}"></div>`).join('');
+    const isOpen=S.openConcept===c.id;
+    const isTutorOpen=S.openTutor===c.id;
+    const modo=S.modos[c.id];
+    const gIdx=S.gIdx[c.id];
+    const gqs=GUIDED[c.id];
 
-    let body = '';
-    if (isOpen) body = `<div class="concept-body open">
-      <div class="c-summary">${c.summary}</div>
+    let body='';
+    if(isOpen) {
+      // Tutor section HTML
+      const chatMsgs=S.chatHistories[c.id]||[];
+      const hasKey=!!apiKey;
+      const tutorBody = isTutorOpen ? `<div class="tutor-body open" id="tutor-body-${c.id}">
+        ${!hasKey ? `<div class="tutor-no-key">
+          <div class="tutor-no-key-text">Activá el tutor con tu API key de Anthropic para chatear sobre tus reflexiones.</div>
+          <button class="btn btn-primary btn-sm" onclick="openKeyModal();event.stopPropagation()">Configurar API key</button>
+        </div>` : `
+        <div class="tutor-msgs" id="tutor-msgs-${c.id}">
+          ${chatMsgs.length===0?`<div style="text-align:center;padding:12px 0 4px;font-size:12px;color:var(--muted);font-style:italic">Preguntame sobre tus reflexiones, pedíme que las conecte con filósofos, o desafiame a encontrar contraejemplos.</div>`:''}
+          ${chatMsgs.map(m=>`<div class="msg msg-${m.role==='user'?'user':'ai'}">
+            <div class="msg-bubble">${formatMsg(m.content)}</div>
+          </div>`).join('')}
+        </div>
+        <div class="tutor-input-row" onclick="event.stopPropagation()">
+          <textarea id="tinput-${c.id}" placeholder="Escribí algo sobre este concepto..." rows="2" onkeydown="tutorKey(event,'${c.id}')"></textarea>
+          <button class="btn btn-primary tutor-send" onclick="sendTutor('${c.id}');event.stopPropagation()" id="tsend-${c.id}">↑</button>
+        </div>
+        <div class="quick-btns" onclick="event.stopPropagation()">
+          <div class="qbtn" onclick="quickSend('${c.id}','Conectá mis reflexiones con filósofos reales.')">Conectar con filósofos</div>
+          <div class="qbtn" onclick="quickSend('${c.id}','Desafiá mis ideas con una pregunta difícil.')">Desafiame</div>
+          <div class="qbtn" onclick="quickSend('${c.id}','¿Qué me falta profundizar sobre este tema?')">¿Qué me falta?</div>
+        </div>`}
+      </div>` : `<div class="tutor-body" id="tutor-body-${c.id}"></div>`;
 
-      <div class="sec">Mis reflexiones</div>
-      ${refs.length===0?'<div class="empty">Todavía no escribiste nada aquí.</div>':refs.map((r,i)=>`
-        <div class="ref-item ${r.chat?'chat':''}">
-          ${r.chat?`<div class="ref-label">${h(r.label||'De nuestra conversación')}</div>`:''}
-          ${h(r.texto)}
-          <div class="ref-date">${r.fecha}</div>
-          <button class="del" onclick="delRef('${c.id}',${i});event.stopPropagation()">×</button>
-        </div>`).join('')}
+      body=`<div class="concept-body open">
+        <div class="c-summary">${c.summary}</div>
 
-      <div class="sec">Agregar reflexión</div>
-      <div class="modo-toggle">
-        <div class="modo-btn ${modo==='libre'?'active':''}" onclick="setModo('${c.id}','libre');event.stopPropagation()">Libre</div>
-        <div class="modo-btn ${modo==='guiada'?'active':''}" onclick="setModo('${c.id}','guiada');event.stopPropagation()">Guiada</div>
-      </div>
-      ${modo==='guiada'?`
-        <div class="guided-nav">
-          <span class="gcounter">${gIdx+1} / ${gqs.length}</span>
-          <div style="display:flex;gap:6px">
-            <button class="btn btn-ghost btn-sm" onclick="prevG('${c.id}');event.stopPropagation()">←</button>
-            <button class="btn btn-ghost btn-sm" onclick="nextG('${c.id}');event.stopPropagation()">→</button>
+        <div class="sec">Mis reflexiones</div>
+        ${refs.length===0?'<div class="empty">Todavía no escribiste nada aquí.</div>':refs.map((r,i)=>`
+          <div class="ref-item ${r.fromChat?'from-chat':''}">
+            ${r.fromChat?`<div class="ref-label">${h(r.label||'De nuestra conversación')}</div>`:''}
+            ${h(r.texto)}
+            <div class="ref-date">${r.fecha}</div>
+            <button class="del" onclick="delRef('${c.id}',${i});event.stopPropagation()">×</button>
+          </div>`).join('')}
+
+        <div class="sec">Agregar reflexión</div>
+        <div class="modo-toggle">
+          <div class="modo-btn ${modo==='libre'?'active':''}" onclick="setModo('${c.id}','libre');event.stopPropagation()">Libre</div>
+          <div class="modo-btn ${modo==='guiada'?'active':''}" onclick="setModo('${c.id}','guiada');event.stopPropagation()">Guiada</div>
+        </div>
+        ${modo==='guiada'?`
+          <div class="guided-nav">
+            <span class="gcounter">${gIdx+1} / ${gqs.length}</span>
+            <div style="display:flex;gap:6px">
+              <button class="btn btn-ghost btn-sm" onclick="prevG('${c.id}');event.stopPropagation()">←</button>
+              <button class="btn btn-ghost btn-sm" onclick="nextG('${c.id}');event.stopPropagation()">→</button>
+            </div>
+          </div>
+          <div class="guided-q">${gqs[gIdx]}</div>`:''}
+        <div onclick="event.stopPropagation()">
+          <textarea id="ta-${c.id}" placeholder="${modo==='libre'?'Escribí lo que pensás...':'Tu respuesta...'}" rows="3"></textarea>
+          <button class="btn btn-primary" style="margin-top:8px" onclick="addRef('${c.id}');event.stopPropagation()">Guardar reflexión</button>
+        </div>
+
+        <div class="sec">Preguntas pendientes</div>
+        ${pregs.length===0?'<div class="empty">Sin preguntas pendientes.</div>':pregs.map((p,i)=>`
+          <div class="pend-item">
+            <div class="pcheck ${p.done?'done':''}" onclick="togglePreg('${c.id}',${i});event.stopPropagation()">${p.done?'✓':''}</div>
+            <div class="ptext ${p.done?'done':''}">${h(p.texto)}</div>
+          </div>`).join('')}
+
+        <div class="sec">Preguntas base</div>
+        ${c.preguntasBase.map(p=>`
+          <div class="pend-item">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--gold-light);flex-shrink:0;margin-top:6px"></div>
+            <div class="ptext" style="color:var(--muted);font-style:italic">${p}</div>
+          </div>`).join('')}
+        <div onclick="event.stopPropagation()" style="margin-top:10px">
+          <div class="input-row">
+            <input type="text" id="pi-${c.id}" placeholder="Agregar pregunta pendiente...">
+            <button class="btn btn-primary" onclick="addPreg('${c.id}');event.stopPropagation()">+</button>
           </div>
         </div>
-        <div class="guided-q">${gqs[gIdx]}</div>`:''}
 
-      <div onclick="event.stopPropagation()">
-        <textarea id="ta-${c.id}" placeholder="${modo==='libre'?'Escribí lo que pensás...':'Tu respuesta...'}" rows="3"></textarea>
-        <button class="btn btn-primary" style="margin-top:8px" onclick="addRef('${c.id}');event.stopPropagation()">Guardar</button>
-      </div>
-
-      <div class="sec">Preguntas pendientes</div>
-      ${pregs.length===0?'<div class="empty">Sin preguntas pendientes.</div>':pregs.map((p,i)=>`
-        <div class="pend-item">
-          <div class="pcheck ${p.done?'done':''}" onclick="togglePreg('${c.id}',${i});event.stopPropagation()">${p.done?'✓':''}</div>
-          <div class="ptext ${p.done?'done':''}">${h(p.texto)}</div>
-        </div>`).join('')}
-
-      <div class="sec">Preguntas base</div>
-      ${c.preguntasBase.map(p=>`
-        <div class="pend-item">
-          <div style="width:5px;height:5px;border-radius:50%;background:var(--gold-light);flex-shrink:0;margin-top:6px"></div>
-          <div class="ptext" style="color:var(--muted);font-style:italic">${p}</div>
-        </div>`).join('')}
-
-      <div onclick="event.stopPropagation()" style="margin-top:10px">
-        <div class="input-row">
-          <input type="text" id="pi-${c.id}" placeholder="Agregar pregunta pendiente...">
-          <button class="btn btn-primary" onclick="addPreg('${c.id}');event.stopPropagation()">+</button>
+        <!-- TUTOR SECTION -->
+        <div class="tutor-section">
+          <div class="tutor-section-header" onclick="toggleTutor('${c.id}',event)">
+            <span class="tutor-spark">✦</span>
+            <span class="tutor-section-label ${hasKey?'has-key':''}">${hasKey?'Tutor · Preguntame sobre este concepto':'Tutor · Requiere API key'}</span>
+            <span style="font-size:11px;color:var(--border)">${isTutorOpen?'▲':'▼'}</span>
+          </div>
+          ${tutorBody}
         </div>
-      </div>
-    </div>`;
+
+      </div>`;
+    }
 
     return `<div class="concept-card" style="animation-delay:${ci*0.05}s">
       <div class="concept-header" onclick="toggleConcept('${c.id}')">
@@ -499,11 +565,27 @@ function renderConceptos() {
         <div class="chev ${isOpen?'open':''}">▼</div>
       </div>${body}</div>`;
   }).join('');
+
+  // Scroll tutor msgs to bottom after render
+  CONCEPTS.forEach(c=>{
+    if(S.openTutor===c.id) {
+      const el=document.getElementById('tutor-msgs-'+c.id);
+      if(el) el.scrollTop=el.scrollHeight;
+    }
+  });
+}
+
+function formatMsg(txt) {
+  return h(txt)
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/\n/g,'<br>');
 }
 
 function setModo(id,m){S.modos[id]=m;renderConceptos();}
 function nextG(id){S.gIdx[id]=(S.gIdx[id]+1)%GUIDED[id].length;renderConceptos();}
 function prevG(id){const l=GUIDED[id].length;S.gIdx[id]=(S.gIdx[id]-1+l)%l;renderConceptos();}
+
 function addRef(id){
   const el=document.getElementById('ta-'+id);const txt=el.value.trim();if(!txt)return;
   const f=new Date().toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'});
@@ -516,16 +598,80 @@ function addPreg(id){
 }
 function togglePreg(id,i){S.data.pregs[id][i].done=!S.data.pregs[id][i].done;save();renderConceptos();}
 
+// ── TUTOR CHAT ──
+function tutorKey(e,id){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendTutor(id);}}
+function quickSend(id,msg){if(!apiKey){openKeyModal();return;}doTutorSend(id,msg);}
+
+async function sendTutor(id){
+  if(!apiKey){openKeyModal();return;}
+  const el=document.getElementById('tinput-'+id);
+  const txt=el.value.trim();if(!txt)return;
+  el.value='';
+  await doTutorSend(id,txt);
+}
+
+async function doTutorSend(id,txt){
+  const btn=document.getElementById('tsend-'+id);
+  if(btn) btn.disabled=true;
+
+  S.chatHistories[id].push({role:'user',content:txt});
+
+  // Add thinking placeholder
+  const thinkId='think-'+Date.now();
+  S.chatHistories[id].push({role:'assistant',content:'__thinking__',_id:thinkId});
+  renderConceptos();
+
+  // Build context from refs on first message
+  let messages=[...S.chatHistories[id].filter(m=>m.content!=='__thinking__')];
+  if(messages.length===1){
+    const refs=S.data.refs[id]||[];
+    const cons=S.data.cons||[];
+    let ctx='';
+    if(refs.length){
+      ctx+=`Reflexiones de Manu sobre "${CONCEPTS.find(c=>c.id===id).name}":\n`;
+      refs.forEach(r=>{ctx+=`- ${r.texto}\n`;});
+    }
+    if(cons.length){
+      ctx+=`\nConexiones que identificó entre conceptos:\n`;
+      cons.forEach(c=>{ctx+=`- ${c.texto}\n`;});
+    }
+    if(ctx) messages=[{role:'user',content:ctx+'\n\n---\n\n'+txt}];
+  }
+
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:SYSTEM_PROMPT,messages})
+    });
+    const data=await res.json();
+    // Remove thinking
+    S.chatHistories[id]=S.chatHistories[id].filter(m=>m.content!=='__thinking__');
+    if(data.error){
+      S.chatHistories[id].push({role:'assistant',content:`*Error:* ${data.error.message}`});
+      S.chatHistories[id]=S.chatHistories[id].filter((_,i)=>i!==S.chatHistories[id].length-2);
+    } else {
+      S.chatHistories[id].push({role:'assistant',content:data.content[0].text});
+    }
+  } catch(e){
+    S.chatHistories[id]=S.chatHistories[id].filter(m=>m.content!=='__thinking__');
+    S.chatHistories[id].push({role:'assistant',content:'*Hubo un error de conexión. Verificá tu API key.*'});
+  }
+
+  renderConceptos();
+  if(btn) btn.disabled=false;
+}
+
 // ── CONEXIONES ──
 function renderConexiones(){
   const names={barco:'Barco de Teseo',nietzsche:'Nietzsche',trauma:'Trauma colectivo'};
-  document.getElementById('con-list').innerHTML = S.data.cons.length===0?'<div class="empty">Todavía no registraste conexiones.</div>':
+  document.getElementById('con-list').innerHTML=S.data.cons.length===0?'<div class="empty">Todavía no registraste conexiones.</div>':
     S.data.cons.map((c,i)=>`<div class="con-item">
       <button class="del" onclick="delCon(${i})">×</button>
       ${h(c.texto)}
       <div class="con-tags">${(c.tags||[]).map(t=>`<span class="con-tag">${t}</span>`).join('')}</div>
     </div>`).join('');
-  document.getElementById('tag-pills').innerHTML = Object.entries(names).map(([k,v])=>
+  document.getElementById('tag-pills').innerHTML=Object.entries(names).map(([k,v])=>
     `<div class="tag-pill ${S.selTags.includes(k)?'active':''}" onclick="toggleTag('${k}')">${v}</div>`).join('');
 }
 function toggleTag(t){const i=S.selTags.indexOf(t);i===-1?S.selTags.push(t):S.selTags.splice(i,1);renderConexiones();}
@@ -561,23 +707,17 @@ function addPregGlobal(){
 // ── PLAN ──
 function renderPlan(){
   const tc={c:'ptag-c',l:'ptag-l',r:'ptag-r',j:'ptag-j'};
-  document.getElementById('plan-cont').innerHTML = PLAN.map(w=>`
+  document.getElementById('plan-cont').innerHTML=PLAN.map(w=>`
     <div class="plan-week">
       <div class="plan-wh" onclick="togglePlan(${w.num})">
         <div class="plan-num ${w.cur?'cur':''}">${w.num}</div>
-        <div style="flex:1">
-          <div class="plan-wtitle">${w.title}</div>
-          <div class="plan-wsub">${w.sub}</div>
-        </div>
+        <div style="flex:1"><div class="plan-wtitle">${w.title}</div><div class="plan-wsub">${w.sub}</div></div>
         <div style="font-size:11px;color:var(--border)">${S.openPlanWeek===w.num?'▲':'▼'}</div>
       </div>
       <div class="plan-wb ${S.openPlanWeek===w.num?'open':''}">
         ${w.days.map(d=>`<div class="plan-day">
           <div class="plan-dname">${d.name}</div>
-          <div style="flex:1">
-            <div class="plan-dact">${d.act}<span class="ptag ${tc[d.tag]}">${d.label}</span></div>
-            <div class="plan-dtime">${d.time}</div>
-          </div>
+          <div style="flex:1"><div class="plan-dact">${d.act}<span class="ptag ${tc[d.tag]}">${d.label}</span></div><div class="plan-dtime">${d.time}</div></div>
         </div>`).join('')}
       </div>
     </div>`).join('');
@@ -586,15 +726,15 @@ function togglePlan(n){S.openPlanWeek=S.openPlanWeek===n?null:n;renderPlan();}
 
 // ── TEMAS ──
 function renderTemas(){
-  const totalRefs = CONCEPTS.reduce((s,c)=>s+(S.data.refs[c.id]||[]).filter(r=>!r.chat).length,0);
-  const unlocked = totalRefs >= 3;
-  const pct = Math.min(Math.round(totalRefs/3*100),100);
-  const added = S.data.addedThemes||[];
+  const totalRefs=CONCEPTS.reduce((s,c)=>s+(S.data.refs[c.id]||[]).filter(r=>!r.fromChat).length,0);
+  const unlocked=totalRefs>=3;
+  const pct=Math.min(Math.round(totalRefs/3*100),100);
+  const added=S.data.addedThemes||[];
   let html='';
   if(!unlocked) html+=`<div class="lock-box">
-    <div class="lock-icon">🔒</div>
+    <div style="font-size:30px;margin-bottom:8px">🔒</div>
     <div class="lock-title">Nuevos temas, muy pronto</div>
-    <div class="lock-text">Completá 3 reflexiones propias en los conceptos actuales para desbloquear nuevos temas de estudio.</div>
+    <div class="lock-text">Completá 3 reflexiones propias para desbloquear nuevos temas.</div>
     <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
     <div class="prog-text">${totalRefs} de 3 reflexiones escritas</div>
   </div>`;
@@ -602,21 +742,16 @@ function renderTemas(){
   html+=NEW_THEMES.map(t=>`<div class="tema-card" onclick="${unlocked?`addTheme('${t.id}')`:''}" style="${!unlocked?'opacity:0.5;cursor:default;':''}">
     <div class="tema-inner">
       <div class="tema-icon" style="background:${t.bg}">${t.icon}</div>
-      <div class="tema-meta">
-        <div class="tema-name">${t.name}</div>
-        <div class="tema-cat">${t.cat}</div>
-      </div>
+      <div class="tema-meta"><div class="tema-name">${t.name}</div><div class="tema-cat">${t.cat}</div></div>
       <div class="tema-add ${added.includes(t.id)?'added':''}">${added.includes(t.id)?'✓':'+'}</div>
-    </div>
-  </div>`).join('');
+    </div></div>`).join('');
   document.getElementById('temas-cont').innerHTML=html;
 }
 function addTheme(id){
   if(!S.data.addedThemes)S.data.addedThemes=[];
   if(S.data.addedThemes.includes(id))return;
   S.data.addedThemes.push(id);save();
-  const t=NEW_THEMES.find(x=>x.id===id);
-  toast(`"${t.name}" agregado ✓`);renderTemas();
+  toast(`"${NEW_THEMES.find(x=>x.id===id).name}" agregado ✓`);renderTemas();
 }
 
 load();
