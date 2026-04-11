@@ -773,7 +773,11 @@ function renderConceptCard(c) {
   if (isOpen) {
     const showSintesis = phases.leer && phases.responder && phases.profundizar;
     body = `<div class="concept-body open">
-      <div class="phase-bar">${phaseBar}</div>
+      <div style="padding:12px 16px 0">
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:6px">Tu progreso en este tema</div>
+        <div class="phase-bar">${phaseBar}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:7px;line-height:1.5">Estas etapas se completan automáticamente a medida que usás el tema: abrís el material, usás las preguntas, conversás con Claude y escribís tu síntesis final.</div>
+      </div>
       ${renderMaterials(c)}
       ${renderBaseQuestions(c)}
       ${renderReflexiones(c)}
@@ -895,9 +899,17 @@ function renderBaseQuestions(c) {
 }
 
 function useBaseQuestion(id, qIdx) {
-  // Mark as used
   if (!S.answeredQ[id]) S.answeredQ[id] = [];
-  if (!S.answeredQ[id].includes(qIdx)) S.answeredQ[id].push(qIdx);
+  const idx = S.answeredQ[id].indexOf(qIdx);
+  if (idx !== -1) {
+    // Already marked — toggle OFF
+    S.answeredQ[id].splice(idx, 1);
+    save();
+    renderConceptos();
+    return;
+  }
+  // Mark as used
+  S.answeredQ[id].push(qIdx);
   // Mark responder phase when >= 2 questions engaged
   if (S.answeredQ[id].length >= 2) {
     if (!S.data.phases[id]) S.data.phases[id] = {};
