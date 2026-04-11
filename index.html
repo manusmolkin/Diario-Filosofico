@@ -48,11 +48,10 @@
     .tab-content.active { display:block; }
 
     /* API KEY MODAL */
-    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:200; display:flex; align-items:flex-end; }
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:200; display:flex; align-items:flex-end; }
     .modal-sheet { background:white; border-radius:20px 20px 0 0; padding:24px 20px calc(var(--safe-bottom) + 24px); width:100%; }
     .modal-title { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:8px; }
     .modal-text { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px; }
-    .modal-link { color:var(--gold); font-weight:500; }
 
     /* CONCEPT CARD */
     .concept-card { background:white; border:0.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:12px; }
@@ -66,33 +65,38 @@
     .pdot.on { background:var(--gold); }
     .chev { font-size:11px; color:var(--border); transition:transform 0.25s; }
     .chev.open { transform:rotate(180deg); }
-    .concept-body { border-top:0.5px solid var(--border-light); padding:14px 16px 0; display:none; }
+    .concept-body { border-top:0.5px solid var(--border-light); display:none; }
     .concept-body.open { display:block; }
-    .c-summary { font-family:'Cormorant Garamond',serif; font-size:15px; font-style:italic; line-height:1.65; color:var(--slate); border-left:2px solid var(--gold-light); padding-left:12px; margin-bottom:16px; }
 
-    .sec { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:16px 0 8px; }
+    /* CONCEPT BODY SECTIONS */
+    .cb-section { padding:16px 16px 0; }
+    .cb-section:last-child { padding-bottom:0; }
+    .sec-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .sec-label::after { content:''; flex:1; height:0.5px; background:var(--border-light); }
 
+    /* MATERIAL DEL PLAN */
+    .plan-material { background:var(--gold-pale); border:0.5px solid var(--gold-light); border-radius:10px; padding:14px 16px; margin-bottom:8px; }
+    .plan-day-tag { font-size:9px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:var(--gold); margin-bottom:6px; }
+    .plan-activity-title { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; color:var(--ink); margin-bottom:4px; line-height:1.3; }
+    .plan-activity-sub { font-size:12px; color:var(--muted); margin-bottom:10px; line-height:1.5; }
+    .plan-expand-btn { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; font-weight:500; color:var(--gold); background:rgba(201,168,76,0.12); border:0.5px solid rgba(201,168,76,0.3); border-radius:6px; padding:6px 12px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+    .plan-expand-btn:active { background:rgba(201,168,76,0.2); }
+    .plan-text-expanded { margin-top:12px; border-top:0.5px solid var(--gold-light); padding-top:12px; font-family:'Cormorant Garamond',serif; font-size:15px; line-height:1.75; color:var(--slate); white-space:pre-wrap; }
+
+    /* PREGUNTAS BASE */
+    .base-questions { display:flex; flex-direction:column; gap:8px; margin-bottom:4px; }
+    .base-q { background:#fffdf7; border:0.5px solid var(--gold-light); border-radius:8px; padding:12px 14px; font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; color:var(--slate); line-height:1.5; cursor:pointer; transition:all 0.15s; display:flex; align-items:flex-start; gap:10px; }
+    .base-q:active { background:var(--gold-pale); border-color:var(--gold); }
+    .base-q-num { font-style:normal; font-size:10px; font-family:'DM Sans',sans-serif; letter-spacing:0.06em; color:var(--gold); font-weight:500; margin-top:2px; flex-shrink:0; }
+    .base-q-answered { opacity:0.5; border-style:dashed; }
+
+    /* REFLEXIONES */
     .ref-item { background:var(--bg); border:0.5px solid var(--border-light); border-radius:8px; padding:10px 32px 10px 12px; margin-bottom:6px; font-size:13px; line-height:1.65; color:var(--ink); position:relative; }
     .ref-item.from-chat { background:var(--gold-pale); border-color:var(--gold-light); }
     .ref-label { font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:4px; }
     .ref-date { font-size:10px; color:var(--muted); margin-top:4px; }
     .del { position:absolute; top:8px; right:8px; background:none; border:none; font-size:16px; color:var(--border); cursor:pointer; line-height:1; padding:2px 4px; }
     .del:active { color:var(--rust); }
-
-    .modo-toggle { display:flex; background:var(--bg2); border-radius:8px; overflow:hidden; margin-bottom:10px; border:0.5px solid var(--border-light); }
-    .modo-btn { flex:1; text-align:center; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:500; padding:8px; cursor:pointer; color:var(--muted); transition:all 0.15s; user-select:none; }
-    .modo-btn.active { background:var(--ink); color:var(--gold); }
-
-    .guided-q { background:#fffdf7; border:0.5px solid var(--gold-light); border-radius:8px; padding:12px 14px; margin-bottom:10px; font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; color:var(--slate); line-height:1.5; }
-    .guided-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-    .gcounter { font-size:10px; color:var(--muted); }
-
-    .pend-item { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:0.5px solid var(--border-light); font-size:13px; line-height:1.55; }
-    .pend-item:last-child { border-bottom:none; }
-    .pcheck { width:18px; height:18px; flex-shrink:0; border:1.5px solid var(--border); border-radius:4px; margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:11px; transition:all 0.15s; }
-    .pcheck.done { background:var(--sage); border-color:var(--sage); color:white; }
-    .ptext { flex:1; color:var(--ink); }
-    .ptext.done { text-decoration:line-through; color:var(--muted); }
 
     textarea, input[type="text"], select { font-family:'DM Sans',sans-serif; font-size:14px; background:white; border:0.5px solid var(--border); border-radius:8px; padding:10px 13px; color:var(--ink); width:100%; outline:none; transition:border-color 0.15s; -webkit-appearance:none; }
     textarea { resize:none; min-height:76px; line-height:1.55; }
@@ -104,184 +108,222 @@
     .btn-primary:active { background:var(--ink2); }
     .btn-sm { padding:6px 12px; font-size:10px; }
     .btn-ghost { background:transparent; color:var(--muted); border:0.5px solid var(--border); }
-    .btn-ghost:active { color:var(--ink); border-color:var(--ink); }
 
-    /* ── TUTOR CHAT (inside concept) ── */
-    .tutor-section { border-top:0.5px solid var(--border-light); margin:16px -16px 0; background:var(--bg); }
-    .tutor-section-header { display:flex; align-items:center; gap:8px; padding:12px 16px; cursor:pointer; user-select:none; }
-    .tutor-spark { font-size:14px; }
-    .tutor-section-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:var(--muted); flex:1; }
-    .tutor-section-label.has-key { color:var(--gold); }
-    .tutor-body { display:none; padding:0 16px 16px; }
-    .tutor-body.open { display:block; }
-    .tutor-msgs { min-height:0; max-height:320px; overflow-y:auto; margin-bottom:10px; -webkit-overflow-scrolling:touch; }
+    /* CONVERSACIÓN SOCRÁTICA */
+    .socratic-section { border-top:1px solid var(--border-light); margin:16px 0 0; background:linear-gradient(to bottom, var(--bg2), var(--bg)); }
+    .socratic-header { display:flex; align-items:center; gap:8px; padding:12px 16px; cursor:pointer; user-select:none; border-bottom:0.5px solid transparent; transition:all 0.2s; }
+    .socratic-header.open { border-bottom-color:var(--border-light); }
+    .soc-icon { font-size:14px; }
+    .soc-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:var(--muted); flex:1; }
+    .soc-label.active { color:var(--gold); }
+    .soc-chev { font-size:10px; color:var(--border); transition:transform 0.2s; }
+    .soc-chev.open { transform:rotate(180deg); }
+
+    .socratic-body { display:none; padding:12px 16px 16px; }
+    .socratic-body.open { display:block; }
+
+    .chat-msgs { min-height:40px; max-height:380px; overflow-y:auto; margin-bottom:12px; -webkit-overflow-scrolling:touch; }
     .msg { margin-bottom:10px; display:flex; flex-direction:column; }
     .msg-user { align-items:flex-end; }
     .msg-ai { align-items:flex-start; }
-    .msg-bubble { max-width:90%; padding:10px 13px; border-radius:13px; font-size:13px; line-height:1.65; }
-    .msg-user .msg-bubble { background:var(--ink); color:var(--parchment); border-bottom-right-radius:3px; }
-    .msg-ai .msg-bubble { background:white; border:0.5px solid var(--border); color:var(--ink); border-bottom-left-radius:3px; }
-    .msg-ai .msg-bubble em { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:var(--slate); }
-    .msg-ai .msg-bubble strong { font-weight:500; }
-    .thinking-dots span { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--border); margin:0 2px; animation:blink 1.2s infinite; }
-    .thinking-dots span:nth-child(2){animation-delay:0.2s}
-    .thinking-dots span:nth-child(3){animation-delay:0.4s}
-    @keyframes blink{0%,80%,100%{opacity:0.2}40%{opacity:1}}
-    .tutor-input-row { display:flex; gap:8px; align-items:flex-end; }
-    .tutor-input-row textarea { min-height:40px; border-radius:10px; font-size:13px; padding:9px 12px; }
-    .tutor-send { width:40px; height:40px; padding:0; border-radius:10px; font-size:17px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-    .quick-btns { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
-    .qbtn { font-size:11px; padding:5px 11px; border-radius:18px; border:0.5px solid var(--border); background:white; color:var(--muted); cursor:pointer; white-space:nowrap; user-select:none; }
-    .qbtn:active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-    .tutor-no-key { text-align:center; padding:16px 0 8px; }
-    .tutor-no-key-text { font-size:12px; color:var(--muted); margin-bottom:10px; line-height:1.5; }
+    .bubble { max-width:88%; padding:10px 13px; border-radius:12px; font-size:13px; line-height:1.6; }
+    .bubble-user { background:var(--ink); color:var(--parchment); border-bottom-right-radius:4px; }
+    .bubble-ai { background:white; border:0.5px solid var(--border-light); color:var(--ink); border-bottom-left-radius:4px; font-family:'Cormorant Garamond',serif; font-size:15px; }
+    .bubble-ai em { font-style:italic; color:var(--muted); }
+    .bubble-thinking { background:var(--bg2); border:0.5px dashed var(--border); color:var(--muted); font-style:italic; font-size:12px; }
 
-    /* CARD */
-    .card { background:white; border:0.5px solid var(--border); border-radius:14px; padding:16px; margin-bottom:14px; }
-    .card-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:500; color:var(--ink); margin-bottom:14px; }
-    .con-item { background:var(--gold-pale); border:0.5px solid var(--gold-light); border-radius:8px; padding:10px 32px 10px 12px; margin-bottom:7px; font-size:13px; line-height:1.65; color:var(--ink); position:relative; }
-    .con-tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
-    .con-tag { font-size:10px; padding:2px 8px; border-radius:10px; background:var(--gold-light); color:#6b5a2a; }
-    .tag-pills { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
-    .tag-pill { font-size:11px; padding:5px 12px; border-radius:20px; cursor:pointer; border:0.5px solid var(--border); background:white; color:var(--muted); transition:all 0.15s; user-select:none; }
-    .tag-pill.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
-    .group-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:16px 0 8px 2px; }
-    .group-label:first-child { margin-top:0; }
+    /* quick-send pills */
+    .quick-pills { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+    .qpill { font-size:11px; color:var(--slate); background:white; border:0.5px solid var(--border); border-radius:20px; padding:5px 11px; cursor:pointer; transition:all 0.15s; font-family:'Cormorant Garamond',serif; font-style:italic; }
+    .qpill:active { background:var(--gold-pale); border-color:var(--gold); color:var(--ink); }
 
-    /* PLAN */
+    .chat-input-row { display:flex; gap:8px; }
+    .chat-input { flex:1; min-height:42px; max-height:100px; resize:none; font-size:13px; padding:10px 12px; line-height:1.45; }
+    .send-btn { width:42px; height:42px; background:var(--ink); color:var(--gold); border:none; border-radius:8px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s; }
+    .send-btn:active { background:var(--ink2); }
+    .send-btn:disabled { opacity:0.4; }
+
+    .save-from-chat { margin-top:8px; display:flex; gap:6px; align-items:center; }
+    .save-chip { font-size:10px; letter-spacing:0.06em; text-transform:uppercase; font-weight:500; background:rgba(74,103,65,0.12); color:var(--sage); border:0.5px solid rgba(74,103,65,0.3); border-radius:6px; padding:5px 10px; cursor:pointer; }
+    .save-chip:active { background:rgba(74,103,65,0.22); }
+
+    /* PLAN TAB */
     .plan-week { background:white; border:0.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:10px; }
-    .plan-wh { display:flex; align-items:center; gap:12px; padding:13px 16px; cursor:pointer; user-select:none; }
-    .plan-num { width:28px; height:28px; border-radius:50%; background:var(--ink); color:var(--gold); font-size:11px; font-weight:500; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .plan-num.cur { background:var(--gold); color:var(--ink); }
-    .plan-wtitle { flex:1; font-size:13px; font-weight:500; color:var(--ink); }
+    .plan-wh { display:flex; align-items:center; gap:12px; padding:14px 16px; cursor:pointer; user-select:none; }
+    .plan-num { width:28px; height:28px; border-radius:50%; background:var(--bg2); border:0.5px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:500; color:var(--muted); flex-shrink:0; }
+    .plan-num.cur { background:var(--gold); border-color:var(--gold); color:var(--ink); }
+    .plan-wtitle { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; color:var(--ink); }
     .plan-wsub { font-size:11px; color:var(--muted); margin-top:1px; }
-    .plan-wb { border-top:0.5px solid var(--border-light); display:none; }
+    .plan-wb { display:none; border-top:0.5px solid var(--border-light); padding:10px 0; }
     .plan-wb.open { display:block; }
-    .plan-day { display:flex; gap:12px; padding:10px 16px; border-bottom:0.5px solid var(--border-light); }
-    .plan-day:last-child { border-bottom:none; }
-    .plan-dname { font-size:10px; font-weight:500; color:var(--muted); min-width:52px; letter-spacing:0.03em; padding-top:2px; }
-    .plan-dact { font-size:13px; color:var(--ink); line-height:1.5; }
+    .plan-day { display:flex; gap:12px; align-items:flex-start; padding:8px 16px; }
+    .plan-dname { font-size:10px; color:var(--gold); font-weight:500; letter-spacing:0.06em; text-transform:uppercase; width:34px; flex-shrink:0; padding-top:1px; }
+    .plan-dact { font-size:13px; color:var(--ink); line-height:1.45; }
     .plan-dtime { font-size:10px; color:var(--muted); margin-top:2px; }
-    .ptag { display:inline-block; font-size:9px; padding:1px 6px; border-radius:8px; margin-left:5px; vertical-align:middle; }
-    .ptag-c{background:#eeedfe;color:#3c3489} .ptag-l{background:#e1f5ee;color:#085041}
-    .ptag-r{background:#faeeda;color:#633806} .ptag-j{background:#faece7;color:#712b13}
+    .ptag { font-size:9px; letter-spacing:0.06em; text-transform:uppercase; font-weight:500; padding:2px 6px; border-radius:4px; margin-left:6px; }
+    .ptag-c { background:rgba(61,74,92,0.12); color:var(--slate); }
+    .ptag-l { background:rgba(74,103,65,0.12); color:var(--sage); }
+    .ptag-r { background:rgba(201,168,76,0.15); color:#9a7a2a; }
+    .ptag-j { background:rgba(139,58,42,0.12); color:var(--rust); }
+
+    /* CONEXIONES */
+    .con-item { background:white; border:0.5px solid var(--border); border-radius:10px; padding:12px 32px 12px 14px; margin-bottom:8px; font-size:13px; line-height:1.6; color:var(--ink); position:relative; }
+    .con-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+    .con-tag { font-size:10px; background:var(--gold-pale); border:0.5px solid var(--gold-light); border-radius:4px; padding:2px 7px; color:var(--muted); }
+    .tag-pills { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+    .tag-pill { font-size:11px; padding:5px 12px; border-radius:20px; border:0.5px solid var(--border); background:white; color:var(--muted); cursor:pointer; }
+    .tag-pill.active { background:var(--ink); color:var(--gold); border-color:var(--ink); }
+
+    /* PENDIENTES */
+    .group-label { font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:500; color:var(--ink); margin:14px 0 6px; padding-bottom:6px; border-bottom:0.5px solid var(--border-light); }
+    .group-label:first-child { margin-top:0; }
+    .pend-item { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:0.5px solid var(--border-light); font-size:13px; line-height:1.55; }
+    .pend-item:last-child { border-bottom:none; }
+    .pcheck { width:18px; height:18px; flex-shrink:0; border:1.5px solid var(--border); border-radius:4px; margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:11px; transition:all 0.15s; }
+    .pcheck.done { background:var(--sage); border-color:var(--sage); color:white; }
+    .ptext { flex:1; color:var(--ink); }
+    .ptext.done { text-decoration:line-through; color:var(--muted); }
 
     /* TEMAS */
-    .tema-card { background:white; border:0.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:10px; cursor:pointer; }
-    .tema-card:active { opacity:0.85; }
-    .tema-inner { display:flex; align-items:center; gap:13px; padding:14px 16px; }
-    .tema-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-    .tema-meta { flex:1; }
-    .tema-name { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; color:var(--ink); }
-    .tema-cat { font-size:10px; color:var(--muted); letter-spacing:0.04em; margin-top:2px; }
-    .tema-add { font-size:20px; color:var(--border); transition:color 0.15s; padding:4px; }
-    .tema-add.added { color:var(--sage); }
-    .lock-box { background:var(--gold-pale); border:0.5px solid var(--gold-light); border-radius:14px; padding:20px; text-align:center; margin-bottom:14px; }
+    .lock-box { background:white; border:0.5px solid var(--border); border-radius:14px; padding:24px 20px; text-align:center; margin-bottom:16px; }
     .lock-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:500; color:var(--ink); margin-bottom:6px; }
-    .lock-text { font-size:13px; color:var(--muted); line-height:1.6; }
-    .prog-bar-wrap { height:4px; background:var(--border-light); border-radius:2px; margin:12px 0 6px; overflow:hidden; }
-    .prog-bar { height:100%; background:var(--gold); border-radius:2px; transition:width 0.4s; }
-    .prog-text { font-size:10px; color:var(--muted); }
-    .phase-label { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:0 0 10px 2px; }
+    .lock-text { font-size:13px; color:var(--muted); line-height:1.55; margin-bottom:14px; }
+    .prog-bar-wrap { background:var(--bg2); border-radius:4px; height:4px; overflow:hidden; margin-bottom:6px; }
+    .prog-bar { background:var(--gold); height:100%; border-radius:4px; transition:width 0.4s; }
+    .prog-text { font-size:11px; color:var(--muted); }
+    .phase-label { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:16px 0 8px; }
+    .tema-card { background:white; border:0.5px solid var(--border); border-radius:12px; margin-bottom:8px; cursor:pointer; transition:border-color 0.15s; }
+    .tema-card:active { border-color:var(--gold); }
+    .tema-inner { display:flex; align-items:center; gap:12px; padding:12px 14px; }
+    .tema-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+    .tema-name { font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:500; color:var(--ink); }
+    .tema-cat { font-size:10px; color:var(--muted); margin-top:1px; }
+    .tema-add { width:24px; height:24px; border-radius:50%; background:var(--bg2); border:0.5px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--muted); margin-left:auto; }
+    .tema-add.added { background:var(--sage); border-color:var(--sage); color:white; font-size:11px; }
 
-    .empty { font-size:12px; color:var(--muted); font-style:italic; padding:6px 0; }
-    .toast { position:fixed; bottom:calc(var(--safe-bottom)+16px); left:50%; transform:translateX(-50%) translateY(80px); background:var(--ink); color:var(--gold); font-size:12px; padding:9px 18px; border-radius:20px; transition:transform 0.3s; z-index:999; white-space:nowrap; box-shadow:0 4px 20px rgba(0,0,0,0.3); }
-    .toast.show { transform:translateX(-50%) translateY(0); }
-    .scroll-content::-webkit-scrollbar { width:3px; }
-    .scroll-content::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-    .concept-card { animation:fadeUp 0.3s ease both; }
-    .concept-card:nth-child(2){animation-delay:0.05s}
-    .concept-card:nth-child(3){animation-delay:0.1s}
+    .empty { font-size:13px; color:var(--muted); text-align:center; padding:24px 0; font-style:italic; font-family:'Cormorant Garamond',serif; }
+    .card-section { background:white; border:0.5px solid var(--border); border-radius:14px; padding:16px; margin-bottom:12px; }
+    .toast { position:fixed; bottom:calc(var(--safe-bottom) + 20px); left:50%; transform:translateX(-50%); background:var(--ink); color:var(--gold); font-size:12px; padding:9px 18px; border-radius:20px; z-index:300; opacity:0; pointer-events:none; transition:opacity 0.2s; white-space:nowrap; }
+    .toast.show { opacity:1; }
+
+    /* FASE PROGRESS BAR */
+    .phase-bar { display:flex; gap:0; margin:0 16px 0; border-radius:8px; overflow:hidden; border:0.5px solid var(--border-light); }
+    .phase-step { flex:1; display:flex; flex-direction:column; align-items:center; padding:8px 4px 7px; gap:3px; background:var(--bg2); border-right:0.5px solid var(--border-light); cursor:default; transition:background 0.2s; }
+    .phase-step:last-child { border-right:none; }
+    .phase-step.done { background:rgba(74,103,65,0.1); }
+    .phase-step.active { background:rgba(201,168,76,0.1); }
+    .phase-step.sealed { background:rgba(74,103,65,0.15); }
+    .phase-icon { font-size:13px; line-height:1; }
+    .phase-name { font-size:8px; letter-spacing:0.06em; text-transform:uppercase; font-weight:500; color:var(--muted); }
+    .phase-step.done .phase-name { color:var(--sage); }
+    .phase-step.active .phase-name { color:#9a7a2a; }
+
+    /* SÍNTESIS FINAL */
+    .sintesis-section { margin:0 16px 16px; background:linear-gradient(135deg, rgba(74,103,65,0.08), rgba(201,168,76,0.06)); border:0.5px solid rgba(74,103,65,0.25); border-radius:12px; overflow:hidden; }
+    .sintesis-header { padding:14px 16px 12px; }
+    .sintesis-title { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:500; color:var(--ink); margin-bottom:4px; }
+    .sintesis-sub { font-size:12px; color:var(--muted); line-height:1.5; }
+    .sintesis-saved { font-family:'Cormorant Garamond',serif; font-size:15px; font-style:italic; color:var(--slate); line-height:1.7; padding:0 16px 14px; border-top:0.5px solid rgba(74,103,65,0.2); padding-top:12px; }
+    .sintesis-date { font-size:10px; color:var(--muted); margin-top:6px; font-style:normal; font-family:'DM Sans',sans-serif; }
+
+    /* TEMA COMPLETADO */
+    .concept-card.sealed { border-color:rgba(74,103,65,0.4); background:rgba(74,103,65,0.03); }
+    .sealed-badge { display:inline-flex; align-items:center; gap:4px; background:rgba(74,103,65,0.12); border:0.5px solid rgba(74,103,65,0.3); border-radius:20px; padding:3px 9px; font-size:9px; letter-spacing:0.08em; text-transform:uppercase; font-weight:500; color:var(--sage); margin-top:4px; }
+
+    /* CHAT LIMIT WARNING */
+    .chat-limit-warn { background:rgba(201,168,76,0.08); border:0.5px solid var(--gold-light); border-radius:8px; padding:10px 13px; margin-bottom:10px; font-size:12px; color:#9a7a2a; line-height:1.5; }
+    .chat-limit-warn strong { font-weight:500; }
   </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-inner">
-    <svg class="logo" viewBox="0 0 42 42" fill="none">
-      <circle cx="21" cy="21" r="17" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="88 18" stroke-linecap="round"/>
-      <path d="M21 9 C27 14 29 18.5 21 23 C13 18.5 15 14 21 9Z" fill="none" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/>
-      <circle cx="21" cy="17.5" r="2.8" fill="#c9a84c" opacity="0.85"/>
-      <circle cx="16.5" cy="29" r="1.3" fill="#c9a84c" opacity="0.45"/>
-      <circle cx="21" cy="31" r="1.6" fill="#c9a84c" opacity="0.65"/>
-      <circle cx="25.5" cy="29" r="1.3" fill="#c9a84c" opacity="0.45"/>
+    <svg class="logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="21" cy="21" r="18" stroke="#c9a84c" stroke-width="1.2" stroke-dasharray="95 18" stroke-linecap="round"/>
+      <path d="M21 8 C28 13 30 18 21 21 C12 18 14 13 21 8Z" fill="none" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/>
+      <circle cx="21" cy="18" r="3.5" fill="#c9a84c" opacity="0.9"/>
+      <circle cx="16" cy="29" r="1.8" fill="#c9a84c" opacity="0.45"/>
+      <circle cx="21" cy="31.5" r="2.2" fill="#c9a84c" opacity="0.65"/>
+      <circle cx="26" cy="29" r="1.8" fill="#c9a84c" opacity="0.45"/>
     </svg>
     <div style="flex:1">
       <div class="header-title">Diario Filosófico</div>
-      <div class="header-sub">Manu · Aprendizaje profundo</div>
+      <div class="header-sub">Manu · Ciclo I</div>
     </div>
     <div class="header-key" onclick="openKeyModal()">
       <div class="key-dot" id="key-dot"></div>
-      <div class="key-label" id="key-label">API</div>
+      <div class="key-label">API</div>
     </div>
   </div>
 </div>
 
 <div class="nav">
-  <div class="nav-tab active" onclick="showTab('conceptos')">Conceptos</div>
-  <div class="nav-tab" onclick="showTab('conexiones')">Conexiones</div>
-  <div class="nav-tab" onclick="showTab('pendientes')">Pendientes</div>
-  <div class="nav-tab" onclick="showTab('plan')">Plan</div>
-  <div class="nav-tab" onclick="showTab('temas')">+ Temas</div>
+  <div class="nav-tab active" onclick="switchTab('conceptos')">Conceptos</div>
+  <div class="nav-tab" onclick="switchTab('plan')">Plan</div>
+  <div class="nav-tab" onclick="switchTab('conexiones')">Conexiones</div>
+  <div class="nav-tab" onclick="switchTab('pendientes')">Pendientes</div>
+  <div class="nav-tab" onclick="switchTab('temas')">+ Temas</div>
 </div>
 
 <div class="scroll-content">
 
-  <div id="tab-conceptos" class="tab-content active">
-    <div id="concept-grid"></div>
+  <!-- CONCEPTOS -->
+  <div class="tab-content active" id="tab-conceptos">
+    <div id="concepts-list"></div>
   </div>
 
-  <div id="tab-conexiones" class="tab-content">
-    <div class="card">
-      <div class="card-title">Conexiones entre conceptos</div>
-      <div id="con-list"></div>
-      <div class="sec">Nueva conexión</div>
-      <textarea id="con-text" placeholder="¿Cómo se relacionan dos o más conceptos?" rows="3"></textarea>
-      <div class="tag-pills" id="tag-pills"></div>
-      <button class="btn btn-primary" onclick="addCon()" style="margin-top:4px">Guardar conexión</button>
-    </div>
-  </div>
-
-  <div id="tab-pendientes" class="tab-content">
-    <div class="card">
-      <div class="card-title">Preguntas abiertas</div>
-      <div id="pend-list"></div>
-      <div class="sec" style="margin-top:16px">Agregar pregunta</div>
-      <input type="text" id="new-preg" placeholder="Una pregunta que quedó abierta...">
-      <div class="input-row" style="margin-top:8px">
-        <select id="new-preg-con">
-          <option value="barco">Barco de Teseo</option>
-          <option value="nietzsche">Nietzsche</option>
-          <option value="trauma">Trauma colectivo</option>
-        </select>
-        <button class="btn btn-primary" onclick="addPregGlobal()">+</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="tab-plan" class="tab-content">
+  <!-- PLAN -->
+  <div class="tab-content" id="tab-plan">
     <div id="plan-cont"></div>
   </div>
 
-  <div id="tab-temas" class="tab-content">
+  <!-- CONEXIONES -->
+  <div class="tab-content" id="tab-conexiones">
+    <div class="card-section">
+      <div class="sec-label">Nueva conexión</div>
+      <div id="tag-pills"></div>
+      <textarea id="con-text" placeholder="¿Qué tienen en común el Barco de Teseo y Nietzsche? ¿Dónde se cruzan estos temas?..." rows="3"></textarea>
+      <div style="margin-top:8px">
+        <button class="btn btn-primary btn-sm" onclick="addCon()">Guardar conexión</button>
+      </div>
+    </div>
+    <div id="con-list"></div>
+  </div>
+
+  <!-- PENDIENTES -->
+  <div class="tab-content" id="tab-pendientes">
+    <div class="card-section">
+      <div class="sec-label">Nueva pregunta pendiente</div>
+      <select id="new-preg-con" style="margin-bottom:8px">
+        <option value="barco">Barco de Teseo</option>
+        <option value="nietzsche">Nietzsche</option>
+        <option value="trauma">Trauma colectivo</option>
+      </select>
+      <div class="input-row">
+        <textarea id="new-preg" placeholder="Una pregunta que quedó abierta..." style="min-height:60px"></textarea>
+        <button class="btn btn-primary" onclick="addPregGlobal()">+</button>
+      </div>
+    </div>
+    <div id="pend-list"></div>
+  </div>
+
+  <!-- TEMAS -->
+  <div class="tab-content" id="tab-temas">
     <div id="temas-cont"></div>
   </div>
 
 </div>
 
 <!-- API KEY MODAL -->
-<div class="modal-overlay" id="key-modal" style="display:none" onclick="closeKeyModal(event)">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-title">Tutor con IA</div>
-    <div class="modal-text">Pegá tu API key de Anthropic. Se guarda solo en tu dispositivo — nunca sale de él.<br><br>Conseguila en <span class="modal-link">console.anthropic.com</span> → API Keys → Create Key.</div>
-    <input type="password" id="key-input" placeholder="sk-ant-..." style="margin-bottom:10px">
+<div class="modal-overlay" id="key-modal" style="display:none" onclick="closeKeyModalBg(event)">
+  <div class="modal-sheet">
+    <div class="modal-title">Clave API de Claude</div>
+    <div class="modal-text">Necesitás una clave de <a href="https://console.anthropic.com" class="modal-link" style="color:var(--gold)">console.anthropic.com</a> para usar el tutor socrático. Se guarda solo en tu dispositivo.</div>
+    <input type="text" id="key-input" placeholder="sk-ant-..." style="margin-bottom:10px">
     <div style="display:flex;gap:8px">
-      <button class="btn btn-primary" onclick="saveKey()" style="flex:1">Guardar</button>
-      <button class="btn btn-ghost" onclick="closeKeyModal()" style="flex:1">Cancelar</button>
-    </div>
-    <div id="key-remove-wrap" style="margin-top:10px;text-align:center;display:none">
-      <span style="font-size:12px;color:var(--rust);cursor:pointer" onclick="removeKey()">Eliminar API key</span>
+      <button class="btn btn-primary" style="flex:1" onclick="saveKey()">Guardar clave</button>
+      <button class="btn btn-ghost" onclick="clearKey()">Borrar</button>
     </div>
   </div>
 </div>
@@ -289,389 +331,886 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ─── DATA ─────────────────────────────────────────────────────────────────────
 const CONCEPTS = [
-  { id:'barco', name:'El barco de Teseo', icon:'⚓', bg:'#e8f0f8', phase:'Semana 1 · Identidad personal',
-    summary:'¿Sigue siendo el mismo barco si reemplazás todas sus piezas? ¿Y sos vos el mismo si cambia todo en vos?',
-    preguntasBase:['¿Qué es lo que, si cambiara, dirías "ya no soy yo"?','¿Los momentos que no recordás eran vos?','¿Dónde está el límite entre el potencial de recordar y la pérdida definitiva de identidad?'] },
-  { id:'nietzsche', name:'Nietzsche y el nihilismo', icon:'💀', bg:'#f0ebe0', phase:'Semana 2 · Modernidad y valores',
-    summary:'"Dios ha muerto." ¿Qué sostiene los valores cuando colapsa el ancla que les daba sentido?',
-    preguntasBase:['¿De dónde vienen tus propios valores? ¿Los elegiste o los heredaste?','¿Qué cosas en tu vida o entorno te parecen ejemplos de "valores vaciados"?','¿Es posible crear valores propios desde adentro, sin garantías externas?'] },
-  { id:'trauma', name:'Historia como trauma colectivo', icon:'🩸', bg:'#f5ece8', phase:'Semana 3 · Memoria colectiva',
-    summary:'Los pueblos, como las personas, pueden quedar atrapados en experiencias pasadas no procesadas.',
-    preguntasBase:['¿Qué traumas históricos podrías estar cargando vos sin saberlo?','¿Puede un pueblo "olvidar" un trauma, o solo enterrarlo?','¿Qué narrativas heredaste sobre quiénes son "los otros"?'] }
+  {
+    id: 'barco',
+    name: 'El barco de Teseo',
+    icon: '⚓',
+    bg: 'rgba(61,74,92,0.1)',
+    phase: 'Semana 1 · Identidad personal',
+    summary: 'Si reemplazás cada tabla de un barco, ¿sigue siendo el mismo barco? ¿Qué hace que algo —o alguien— sea lo que es a través del tiempo?',
+
+    // MATERIALES DEL PLAN (aparecen integrados en el concepto)
+    planMaterials: [
+      {
+        day: 'Lun · Día 1',
+        title: 'El mito original',
+        subtitle: 'El relato de Plutarco sobre el barco que Atenas conservó durante siglos, reemplazando tabla por tabla.',
+        content: `Según Plutarco, los atenienses conservaron el barco con el que Teseo regresó de Creta. Con el tiempo, a medida que las tablas se pudrían, las reemplazaban por nuevas. La nave fue conservada hasta los tiempos de Demetrio de Falero, y los filósofos la usaban como ejemplo del argumento de la identidad a través del tiempo.
+
+El problema filosófico es este: si reemplazás cada tabla, cada mástil, cada cuerda —¿sigue siendo el barco de Teseo? ¿O se convierte en otro barco?
+
+Y ahora la vuelta de tuerca que propuso Hobbes: imaginá que alguien recoge todas las tablas viejas y construye otro barco con ellas. ¿Cuál de los dos es el barco de Teseo "verdadero"? ¿El que tiene continuidad de materia, o el que tiene continuidad de función y reconocimiento social?
+
+Este dilema no es un juego de palabras. Es la pregunta fundamental sobre qué hace que las cosas —y las personas— sean lo que son.`
+      },
+      {
+        day: 'Mar · Día 2',
+        title: 'Borges: El jardín de los senderos que se bifurcan',
+        subtitle: 'Un cuento donde la identidad es siempre múltiple, siempre laberíntica. La versión de Borges de que no existe un "yo" fijo.',
+        content: `"El tiempo se bifurca perpetuamente hacia innumerables futuros."
+
+En El jardín de los senderos que se bifurcan, Borges propone un libro —y una mente— donde todas las elecciones posibles ocurren simultáneamente. No hay un camino: hay todos los caminos. No hay una identidad: hay todas las identidades posibles.
+
+Pensá en vos mismo. ¿Sos el mismo Manu de hace diez años? ¿De hace uno? ¿De ayer? Borges diría que quizás todos esos "Manus" existen en algún sentido, en algún bifurcación del tiempo.
+
+La pregunta que te dejo: si el yo es un laberinto de senderos que se bifurcan, ¿qué significa entonces "tomar una decisión"? ¿Hay un yo que decide, o el yo es el resultado de las decisiones?`
+      },
+      {
+        day: 'Mié · Día 3',
+        title: 'Tu cerebro y la identidad',
+        subtitle: 'La neurociencia dice que el 98% de los átomos de tu cuerpo se renuevan cada año. ¿Qué queda de "vos"?',
+        content: `Desde la neurociencia, la identidad personal se sostiene sobre tres pilares:
+
+1. MEMORIA EPISÓDICA — Recordás experiencias específicas: tu cumpleaños de 15, el primer día de escuela, la cara de alguien que amaste. Esta continuidad narrativa es lo que sentimos como "yo".
+
+2. CONECTIVIDAD NEURONAL — Las sinapsis que formaste, las rutas habituales de tu cerebro, los patrones de respuesta emocional. Aunque las neuronas cambian, las conexiones entre ellas persisten.
+
+3. INTEROCEPTION — La sensación continua de ser "este cuerpo", con esta sensación de sed, de cansancio, de estar aquí.
+
+El problema: en Alzheimer avanzado, los tres pilares colapsan. ¿La persona sigue siendo la misma? ¿Cuándo exactamente deja de serlo?
+
+Locke diría: la identidad personal requiere memoria. Sin memoria del pasado, no hay continuidad de persona. Pero entonces, ¿qué pasa mientras dormís, o cuando estás anestesiado?`
+      },
+      {
+        day: 'Jue · Día 4',
+        title: 'Reflexión escrita',
+        subtitle: 'Momento de escribir tu propia posición. ¿Dónde está el límite entre el potencial de recordar y la pérdida definitiva de identidad?',
+        content: null // null = solo reflexión, sin texto expandible
+      }
+    ],
+
+    // PREGUNTAS BASE (socráticas, aparecen como punto de partida)
+    baseQuestions: [
+      '¿En qué momento exacto dejás de ser vos? ¿Hay un momento, o es un proceso gradual?',
+      'Tu cerebro de hoy no tiene ningún átomo en común con el de hace diez años. ¿Qué es entonces lo que persiste?',
+      'Pensá en alguien que querés. ¿Lo amarías igual si perdiera todos sus recuerdos de vos?',
+      'Si pudieras copiar tu mente en otra persona, ¿cuál de las dos serías vos?'
+    ],
+
+    // SISTEMA SOCRÁTICO (instrucciones para Claude)
+    socraticSystem: `Sos un tutor socrático especializado en filosofía. Estás ayudando a Manu a explorar el problema del Barco de Teseo y la identidad personal.
+
+Tu rol: NO explicar ni dar respuestas. Tu único trabajo es hacer preguntas que lleven a Manu a pensar más profundo.
+
+Cuando Manu comparte una reflexión:
+1. Reconocé brevemente su punto (1 oración)
+2. Identificá la tensión o contradicción más interesante en lo que dijo
+3. Hacé UNA sola pregunta que lo lleve más lejos
+
+Temas relacionados que podés usar: Locke (identidad por memoria), Hume (el yo como haz de percepciones), Parfit (teleportación y continuidad), Borges (identidad múltiple), neurociencia (sinapsis y continuidad).
+
+Tono: inteligente pero accesible, nunca pedante. Hablá en español rioplatense informal. Máximo 4 oraciones por respuesta.`
+  },
+
+  {
+    id: 'nietzsche',
+    name: 'Nietzsche y el nihilismo',
+    icon: '⚡',
+    bg: 'rgba(139,58,42,0.1)',
+    phase: 'Semana 2 · Valores y sentido',
+    summary: '"Dios ha muerto. Y nosotros lo hemos matado." ¿Qué hacemos cuando los valores en los que creíamos colapsan?',
+
+    planMaterials: [
+      {
+        day: 'Lun · Día 1',
+        title: '¿Qué significa "Dios ha muerto"?',
+        subtitle: 'No es un anuncio de ateísmo. Es el diagnóstico de que los valores absolutos ya no sostienen la vida moderna.',
+        content: `Cuando Nietzsche escribe "Gott ist tot" en La gaya ciencia (1882), no habla de teología. Habla de un colapso cultural.
+
+Durante siglos, Dios era el fundamento de todo: la moral, el sentido, el orden del cosmos. Pero la Ilustración, la ciencia moderna y la crítica filosófica habían erosionado esa fundación. Nietzsche es el primero en ver las consecuencias: si Dios (como principio ordenador) ya no existe, ¿sobre qué base construimos valores? ¿De dónde saca sentido la vida?
+
+El "loco" que grita en la plaza pública no está celebrando la muerte de Dios. Está aterrado. Dice: "¿Quién nos dio la esponja para borrar el horizonte entero? ¿Qué hicimos cuando desencadenamos la tierra de su sol?"
+
+El nihilismo es la consecuencia lógica: si no hay valores absolutos, quizás no hay valores. Si no hay sentido dado, quizás no hay sentido.
+
+Pero Nietzsche no se queda ahí. El Übermensch no es un superhombre musculoso: es alguien capaz de crear sus propios valores después del colapso.`
+      },
+      {
+        day: 'Mar · Día 2',
+        title: 'El eterno retorno',
+        subtitle: 'Imaginá que tu vida se repite infinitas veces, exactamente igual. ¿Cambiarías algo?',
+        content: `El eterno retorno es el pensamiento más pesado de Nietzsche: ¿Y si todo lo que has vivido, todo lo que vivirás, se repitiera infinitas veces?
+
+No es una teoría cosmológica. Es una prueba moral.
+
+Si supieras que esta conversación, esta decisión, este momento de duda, se va a repetir eternamente —¿lo vivirías distinto? ¿Con más intensidad, más autenticidad, más valentía?
+
+El eterno retorno es un filtro: ¿amas tu vida lo suficiente como para quererla eterna?
+
+Nietzsche llamó a esto el "amor fati" —amor al destino. No solo aceptar lo que te toca, sino amarlo activamente. No "podría haber sido peor". Sino: "quiero que esto haya sido, exactamente así".
+
+La pregunta que arde: ¿hay algo en tu vida que no quisieras repetir eternamente? ¿Qué dice eso sobre cómo estás viviendo?`
+      },
+      {
+        day: 'Mié · Día 3',
+        title: 'Nihilismo hoy: redes, algoritmos y el fin del sentido',
+        subtitle: 'El nihilismo que Nietzsche anticipó se parece sospechosamente al scroll infinito y la cultura de los memes.',
+        content: `El filósofo Mark Fisher llamó a nuestro tiempo "realismo capitalista": la incapacidad de imaginar un sistema diferente al actual. Es más fácil imaginar el fin del mundo que el fin del capitalismo.
+
+¿Es eso nihilismo? Sí y no.
+
+El nihilismo clásico dice: no hay valores. El nihilismo contemporáneo dice: hay muchos valores, todos equivalentes, ninguno importa más que otro. El resultado es el mismo: parálisis.
+
+Las redes sociales aceleran esto. Cada día hay una causa nueva, una indignación nueva, un formato nuevo. Todo es urgente. Todo es pasajero. Nada deja huella.
+
+Nietzsche diría: esto es exactamente lo que pasa cuando no construís tus propios valores. Cuando dejás que el algoritmo decida qué importa.
+
+La salida que propone: no más valores "prestados". Crear los propios. Pero eso requiere algo que el scroll no permite: tiempo de quietud para escucharte.`
+      },
+      {
+        day: 'Jue · Día 4',
+        title: 'Reflexión: ¿Cuáles son tus valores?',
+        subtitle: '¿Los elegiste vos, o los heredaste? ¿Resistirían el peso del eterno retorno?',
+        content: null
+      }
+    ],
+
+    baseQuestions: [
+      '¿Hay algo en lo que creés sin cuestionarlo? ¿De dónde viene esa creencia?',
+      'Si el sentido de la vida no viene dado, ¿cómo lo estás construyendo vos?',
+      '¿Cuándo fue la última vez que hiciste algo que querías repetir eternamente?',
+      'Nietzsche dice que el hombre moderno es reactivo —vive en función de lo que otros esperan. ¿En qué áreas de tu vida sos reactivo?'
+    ],
+
+    socraticSystem: `Sos un tutor socrático especializado en filosofía. Estás ayudando a Manu a explorar a Nietzsche y el nihilismo contemporáneo.
+
+Tu rol: NO explicar ni dar respuestas. Tu trabajo es hacer preguntas que lleven a Manu a confrontar sus propias creencias y valores.
+
+Cuando Manu comparte una reflexión:
+1. Reconocé brevemente su punto (1 oración máximo)
+2. Encontrá la tensión más interesante: ¿dónde está siendo inconsistente? ¿Dónde evita algo incómodo?
+3. Hacé UNA sola pregunta que lo desafíe a ir más hondo
+
+Temas que podés usar: voluntad de poder, amor fati, eterno retorno, nihilismo pasivo vs activo, realismo capitalista (Mark Fisher), la diferencia entre valores heredados y valores elegidos.
+
+Tono: directo, un poco incómodo (Nietzsche no era amable), pero nunca cruel. Español rioplatense informal. Máximo 4 oraciones.`
+  },
+
+  {
+    id: 'trauma',
+    name: 'Historia como trauma colectivo',
+    icon: '🌊',
+    bg: 'rgba(74,103,65,0.1)',
+    phase: 'Semana 3 · Memoria y comunidad',
+    summary: '¿Los pueblos heredan el dolor de sus ancestros? ¿Cómo se transmite el trauma a través de generaciones que no vivieron el hecho?',
+
+    planMaterials: [
+      {
+        day: 'Lun · Día 1',
+        title: '¿Qué es el trauma transgeneracional?',
+        subtitle: 'La epigenética y la psicología muestran que el trauma puede heredarse biológicamente. No es metáfora.',
+        content: `En los años 90, la investigadora Rachel Yehuda estudió a hijos de sobrevivientes del Holocausto. Encontró algo perturbador: tenían niveles anómalos de cortisol —la hormona del estrés— similares a los de sus padres. No porque hubieran vivido lo mismo. Sino porque algo se había transmitido.
+
+La epigenética muestra que los traumas severos pueden modificar la expresión genética de formas que se heredan. No el trauma en sí, sino una "disposición" al estrés, a la hipervigilancia, a ciertos patrones de respuesta emocional.
+
+Pero hay una dimensión más amplia: el trauma cultural. Los pueblos construyen narrativas colectivas del sufrimiento que se transmiten a través de rituales, historias, silencios familiares, modos de relacionarse con el poder.
+
+Argentina es un caso de estudio. La dictadura dejó un trauma social que todavía organiza la política, las relaciones familiares, el lenguaje. ¿Sentís algo de eso en tu propia historia?`
+      },
+      {
+        day: 'Mar · Día 2',
+        title: 'Memoria, olvido y justicia',
+        subtitle: '¿Recordar el pasado cura o reabre heridas? ¿Puede haber justicia sin memoria?',
+        content: `Paul Ricoeur distinguió tres modos de memoria:
+
+MEMORIA REPETICIÓN: revivir el trauma sin elaborarlo. La herida que no cierra. El pueblo que no puede hablar de otra cosa que de lo que le hicieron.
+
+MEMORIA TRABAJO: elaborar el pasado para poder vivir con él. No olvidarlo, sino transformarlo en algo que permita seguir.
+
+MEMORIA DEBER: la obligación ética de recordar para que no se repita. "Nunca más" como imperativo moral.
+
+El problema: la memoria también puede usarse como arma. Quien controla el relato del pasado, controla el presente. Los nacionalismos construyen "traumas fundacionales" que justifican violencia actual.
+
+¿Hay una forma de recordar que no envenene? ¿O el trauma colectivo siempre requiere un "ellos" a quien culpar?`
+      },
+      {
+        day: 'Mié · Día 3',
+        title: 'Tu historia familiar',
+        subtitle: 'Toda familia tiene un trauma no dicho. ¿Cuál es el tuyo? ¿Cómo lo seguís cargando sin saber?',
+        content: `El psicoanalista Nicolas Abraham habló de "fantasmas": secretos o traumas de generaciones anteriores que habitan en los descendientes sin que estos sepan por qué.
+
+No se heredan los hechos. Se heredan los silencios alrededor de los hechos.
+
+Una familia que perdió todo en la crisis del 2001 puede transmitir a sus hijos una ansiedad económica estructural: la sensación de que el piso puede hundirse en cualquier momento, aunque los hijos nunca hayan pasado hambre.
+
+Una familia con un desaparecido puede transmitir una relación con la autoridad y con el peligro que nadie nunca puso en palabras.
+
+¿Hay algo en tu historia familiar que funciona así? Un tema que no se toca, una emoción que aparece sin causa aparente, una forma de relacionarse con el dinero, el poder, o el amor que viene de antes.`
+      },
+      {
+        day: 'Jue · Día 4',
+        title: 'Reflexión: ¿Qué cargás sin saber?',
+        subtitle: '¿Podés identificar un patrón en tu vida que quizás venga de más lejos que vos?',
+        content: null
+      }
+    ],
+
+    baseQuestions: [
+      '¿Sentís que sos responsable de cosas que ocurrieron antes de que nacieras? ¿Por qué?',
+      '¿Hay algo que en tu familia nunca se habla? ¿Qué crees que hay detrás de ese silencio?',
+      '¿Cómo distinguís entre recordar para no repetir, y quedarse atrapado en el pasado?',
+      '¿Creés que Argentina puede sanar su trauma colectivo? ¿Qué necesitaría para eso?'
+    ],
+
+    socraticSystem: `Sos un tutor socrático especializado en filosofía e historia. Estás ayudando a Manu a explorar el trauma colectivo, la memoria histórica y cómo se transmite el dolor entre generaciones.
+
+Tu rol: facilitar la reflexión personal, no dar cátedra. Conectar lo filosófico con lo vivido.
+
+Cuando Manu comparte una reflexión:
+1. Escuchá activamente —reconocé lo que dijo en 1 oración
+2. Conectá su experiencia personal con el concepto más amplio
+3. Hacé UNA pregunta que lo lleve de lo abstracto a lo concreto (o viceversa)
+
+Temas útiles: Ricoeur (memoria-trabajo), Abraham (fantasmas transgeneracionales), epigenética del trauma, dictadura argentina, identidad colectiva vs individual.
+
+Tono: cálido pero riguroso. Este tema puede ser personal. Español rioplatense. Máximo 4 oraciones.`
+  }
 ];
 
-const GUIDED = {
-  barco:['¿Qué parte de vos sentís que es más "esencial"? ¿Por qué?','¿Hubo un momento en tu vida donde sentiste que eras una persona diferente a quien eras antes?','¿La memoria hace al yo, o el yo hace a la memoria?','¿Una persona bajo anestesia sigue siendo la misma — porque tiene el potencial de despertar — mientras que alguien con Alzheimer avanzado ya no? ¿Dónde está ese límite?'],
-  nietzsche:['¿Hay algo en lo que creés firmemente y no sabés bien por qué?','¿Qué valor de los que tenés hoy creés que tendrías si hubieras crecido en otra cultura?','¿El cinismo contemporáneo es nihilismo disfrazado o algo distinto?'],
-  trauma:['¿Hay algo de "lo argentino" que te resulte difícil de explicar desde el presente?','¿Conocés alguna historia familiar que muestre cómo el pasado pesa en el presente?','¿Puede un trauma colectivo resolverse sin ser nombrado públicamente?']
-};
-
-const INIT_REFS = {
-  barco:[
-    {texto:'Sí y no. Es el barco aunque las piezas sean distintas, pero aunque sea igual al barco con el que llegó Teseo, no es el mismo, porque han cambiado todas las piezas.',fecha:'16 de marzo de 2025',fromChat:true,label:'Primera respuesta al dilema del barco'},
-    {texto:'Lo que hace que sea yo son mis neuronas. Si existiera el trasplante de cerebro y me pusieran uno nuevo, sería como estar atrapado en el cuerpo de otra persona. El cuerpo es el envase —fundamental para la existencia del contenido—, pero el cerebro es el contenido.',fecha:'16 de marzo de 2025',fromChat:true,label:'¿Qué es lo que, si cambiara, ya no sería yo?'},
-    {texto:'Reconozco que sigo siendo yo porque he tenido experiencias que estimularon ciertas rutas de conexión entre neuronas. Aunque ahora se estimulen poco, si les doy combustible, se vuelven a establecer más rápido porque ya las viví antes. La continuidad está en esos caminos físicos que el cerebro construyó.',fecha:'16 de marzo de 2025',fromChat:true,label:'Sobre la continuidad neuronal'},
-    {texto:'Los momentos que no recuerdo eran yo, porque tenían el potencial de volverse memorables. La identidad también la sostienen los observadores: una persona con Alzheimer avanzado pierde su identidad para sí mismo, pero su pareja, hermano, hijos siguen adjudicándole la misma identidad. Si nadie la recuerda —ni ella ni un tercero—, la identidad se pierde.',fecha:'16 de marzo de 2025',fromChat:true,label:'Identidad desde adentro y desde afuera'},
-  ],
-  nietzsche:[],trauma:[]
-};
-
-const INIT_PREGS = {
-  barco:[{texto:'¿Una persona bajo anestesia general sigue siendo la misma — porque tiene el potencial de despertar y recordar — mientras que alguien con Alzheimer avanzado ya no, porque ese potencial se cerró? ¿Dónde está exactamente ese límite?',done:false}],
-  nietzsche:[],trauma:[]
-};
-
-const PLAN=[
-  {num:1,cur:true,title:'El barco de Teseo',sub:'Identidad personal',days:[{name:'Lun/Mar',act:'Conversamos: historia de Teseo con personajes y giros',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Leés "Borges y yo" — pedíme el texto a mí',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'Escribís: ¿qué hace que vos seas vos? Sin googlear.',time:'10-15 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'Juego: dilema de identidad, debatimos tu respuesta',time:'15-20 min',tag:'j',label:'Juego'}]},
-  {num:2,title:'Nietzsche y el nihilismo',sub:'Modernidad y valores',days:[{name:'Lun/Mar',act:'Conversamos: Nietzsche como personaje — su vida y su idea central',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Leés 3 aforismos de El crepúsculo de los ídolos',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'Anotás 2 cosas en tu vida que parezcan "valores vaciados"',time:'10 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'Juego: el detective filosófico',time:'15-20 min',tag:'j',label:'Juego'}]},
-  {num:3,title:'Historia como trauma colectivo',sub:'Memoria colectiva',days:[{name:'Lun/Mar',act:'Conversamos: el caso argentino — dictadura, silencio, memoria',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Elegís un caso cercano y leés algo breve',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'¿Qué traumas históricos podrías estar cargando sin saberlo?',time:'10 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'Juego: el arqueólogo del presente',time:'15-20 min',tag:'j',label:'Juego'}]},
-  {num:4,title:'Los tres conceptos se tocan',sub:'Conexión',days:[{name:'Lun/Mar',act:'¿Puede un pueblo tener identidad como el barco de Teseo?',time:'10 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Leés un fragmento que conecta los tres temas',time:'10 min',tag:'l',label:'Lectura'},{name:'Viernes',act:'Escribís cómo se conectan los 3 conceptos. Una página máximo.',time:'15 min',tag:'r',label:'Reflexión'},{name:'Fin de sem.',act:'El examen socrático — defendés tus ideas, yo te desafío',time:'20 min',tag:'j',label:'Juego'}]},
-  {num:5,title:'Consolidación y apertura',sub:'Cierre del ciclo',days:[{name:'Lun/Mar',act:'Me explicás los 3 conceptos como si yo no supiera nada',time:'10-15 min',tag:'c',label:'Conversación'},{name:'Mié/Jue',act:'Elegimos juntos el próximo tema a explorar',time:'10 min',tag:'c',label:'Conversación'},{name:'Fin de sem.',act:'Leés algo nuevo que conecte con lo que ya sabés',time:'15-20 min',tag:'l',label:'Lectura'}]}
+const PLAN = [
+  { num:1, cur:true, title:'El barco de Teseo', sub:'Identidad personal y continuidad', days:[
+    {name:'Lun',act:'El mito original (Plutarco narrado)',tag:'l',label:'Lectura',time:'12 min'},
+    {name:'Mar',act:'Borges: "El jardín de los senderos que se bifurcan"',tag:'l',label:'Lectura',time:'15 min'},
+    {name:'Mié',act:'Conversación socrática: ¿qué hace que seas vos?',tag:'c',label:'Conversación',time:'10 min'},
+    {name:'Jue',act:'Reflexión escrita: el problema del Alzheimer',tag:'j',label:'Escritura',time:'10 min'},
+    {name:'Vie',act:'Locke vs Hume: dos teorías del yo (explicación narrada)',tag:'c',label:'Conversación',time:'12 min'},
+    {name:'Sáb',act:'Juego: ¿cuándo deja de ser el mismo barco?',tag:'r',label:'Juego',time:'20 min'},
+    {name:'Dom',act:'Conexión con tu propia historia de identidad',tag:'j',label:'Escritura',time:'15 min'},
+  ]},
+  { num:2, cur:false, title:'Nietzsche y el nihilismo', sub:'Valores, sentido y la muerte de Dios', days:[
+    {name:'Lun',act:'"Dios ha muerto" — qué significa realmente',tag:'l',label:'Lectura',time:'12 min'},
+    {name:'Mar',act:'El eterno retorno como prueba moral',tag:'l',label:'Lectura',time:'10 min'},
+    {name:'Mié',act:'Nihilismo contemporáneo: redes y algoritmos',tag:'c',label:'Conversación',time:'15 min'},
+    {name:'Jue',act:'¿Cuáles son tus valores? ¿Los elegiste?',tag:'j',label:'Escritura',time:'12 min'},
+    {name:'Vie',act:'El Übermensch — mito y realidad',tag:'l',label:'Lectura',time:'10 min'},
+    {name:'Sáb',act:'Debatir: ¿el nihilismo libera o paraliza?',tag:'r',label:'Juego',time:'20 min'},
+    {name:'Dom',act:'Amor fati: escribir algo que quieras que se repita eternamente',tag:'j',label:'Escritura',time:'15 min'},
+  ]},
+  { num:3, cur:false, title:'Historia como trauma colectivo', sub:'Memoria, herencia y comunidad', days:[
+    {name:'Lun',act:'Epigenética del trauma: la ciencia del dolor heredado',tag:'l',label:'Lectura',time:'12 min'},
+    {name:'Mar',act:'Ricoeur: memoria-repetición vs memoria-trabajo',tag:'l',label:'Lectura',time:'10 min'},
+    {name:'Mié',act:'Argentina y el trauma de la dictadura',tag:'c',label:'Conversación',time:'15 min'},
+    {name:'Jue',act:'Tu historia familiar: ¿qué cargás sin saber?',tag:'j',label:'Escritura',time:'15 min'},
+    {name:'Vie',act:'¿Puede haber justicia sin memoria?',tag:'c',label:'Conversación',time:'12 min'},
+    {name:'Sáb',act:'Mapa del trauma: identificar patrones en tu familia',tag:'r',label:'Juego',time:'20 min'},
+    {name:'Dom',act:'Carta a tus descendientes: ¿qué no querés transmitirles?',tag:'j',label:'Escritura',time:'20 min'},
+  ]},
+  { num:4, cur:false, title:'El libre albedrío', sub:'¿Sos realmente libre?', days:[
+    {name:'Lun',act:'Determinismo: si todo tiene causa, ¿dónde está tu libertad?',tag:'l',label:'Lectura',time:'12 min'},
+    {name:'Mar',act:'Spinoza vs Kant: dos visiones de la libertad',tag:'l',label:'Lectura',time:'15 min'},
+    {name:'Mié',act:'Neurociencia y el libre albedrío (experimentos de Libet)',tag:'c',label:'Conversación',time:'12 min'},
+    {name:'Jue',act:'¿Cuándo sentiste que elegiste realmente algo?',tag:'j',label:'Escritura',time:'12 min'},
+    {name:'Vie',act:'Compatibilismo: libertad dentro del determinismo',tag:'c',label:'Conversación',time:'10 min'},
+    {name:'Sáb',act:'Juego del diálogo: defender el determinismo y el libre albedrío',tag:'r',label:'Juego',time:'20 min'},
+    {name:'Dom',act:'Reflexión final: ¿tu vida cambia si no tenés libre albedrío?',tag:'j',label:'Escritura',time:'15 min'},
+  ]},
+  { num:5, cur:false, title:'El tiempo y la muerte', sub:'Heidegger, Epicuro y el arte de vivir', days:[
+    {name:'Lun',act:'Epicuro: "Cuando la muerte está, yo no estoy"',tag:'l',label:'Lectura',time:'10 min'},
+    {name:'Mar',act:'Heidegger: el ser-para-la-muerte como fuente de sentido',tag:'l',label:'Lectura',time:'15 min'},
+    {name:'Mié',act:'¿Cómo cambiaría tu vida si supieras cuándo morís?',tag:'c',label:'Conversación',time:'12 min'},
+    {name:'Jue',act:'Escribir sobre algo que postergás por miedo',tag:'j',label:'Escritura',time:'12 min'},
+    {name:'Vie',act:'El tiempo como escasez: cómo el capitalismo colonizó el tiempo',tag:'c',label:'Conversación',time:'15 min'},
+    {name:'Sáb',act:'Crear tu propio "memento mori"',tag:'r',label:'Juego',time:'20 min'},
+    {name:'Dom',act:'Carta a tu yo del futuro: ¿qué querés que recuerde?',tag:'j',label:'Escritura',time:'20 min'},
+  ]}
 ];
 
-const NEW_THEMES=[
-  {id:'t1',icon:'🧬',bg:'#e8f5e8',name:'El libre albedrío y la neurociencia',cat:'Filosofía de la mente'},
-  {id:'t2',icon:'🌀',bg:'#ede8f5',name:'El eterno retorno de Nietzsche',cat:'Filosofía · Continuación'},
-  {id:'t3',icon:'👁',bg:'#f0ebe0',name:'El problema difícil de la conciencia',cat:'Filosofía de la mente'},
-  {id:'t4',icon:'🏛',bg:'#e8f0f8',name:'Por qué caen los imperios',cat:'Historia'},
-  {id:'t5',icon:'🌍',bg:'#f5e8e8',name:'El fin de la globalización',cat:'Actualidad'},
-  {id:'t6',icon:'⚖️',bg:'#e8f5ee',name:'Ética del cuidado vs. ética de la justicia',cat:'Filosofía moral'},
-  {id:'t7',icon:'🤖',bg:'#e8ecf5',name:'La IA y el sentido del trabajo',cat:'Actualidad · Filosofía'},
-  {id:'t8',icon:'📡',bg:'#f5ece8',name:'La paradoja de la información',cat:'Actualidad · Epistemología'},
-  {id:'t9',icon:'🔭',bg:'#e8f0f5',name:'El universo como lugar hostil',cat:'Cosmología · Filosofía'},
-  {id:'t10',icon:'🎭',bg:'#f0e8f5',name:'Identidad nacional como construcción',cat:'Filosofía política'}
+const NEW_THEMES = [
+  {id:'freud',name:'Freud y el inconsciente',cat:'Psicología · Semana 6',icon:'🔮',bg:'rgba(139,58,42,0.08)'},
+  {id:'platon',name:'El mito de la caverna',cat:'Filosofía clásica · Semana 7',icon:'🏛️',bg:'rgba(61,74,92,0.08)'},
+  {id:'camus',name:'El absurdo y la rebelión',cat:'Existencialismo · Semana 8',icon:'🌅',bg:'rgba(201,168,76,0.1)'},
+  {id:'darwin',name:'Evolución y moral',cat:'Biología · Filosofía · Semana 9',icon:'🦋',bg:'rgba(74,103,65,0.08)'},
+  {id:'wittgenstein',name:'Los límites del lenguaje',cat:'Filosofía analítica · Semana 10',icon:'📐',bg:'rgba(61,74,92,0.08)'},
 ];
 
-const SYSTEM_PROMPT = `Sos el tutor filosófico personal de Manu. Tu estilo: contás historias, hacés preguntas socráticas, conectás las ideas de Manu con filósofos reales (como cuando le dijiste que llegó a la misma conclusión que Locke), usás ejemplos del contexto argentino y cotidiano.
-
-Reglas:
-- Siempre en español rioplatense (vos, che, etc.)
-- Cuando Manu comparte una reflexión, señalás qué filósofo o corriente llegó a algo similar, luego profundizás o desafiás
-- Usás cursiva (*texto*) para citas o conceptos clave
-- Hacés UNA sola pregunta por respuesta, nunca varias
-- Sos cálido pero exigente — no dejás pasar ideas sin profundizarlas
-- Respuestas concisas: 3-5 párrafos máximo
-- Conocés el plan de 5 semanas. Manu está en semana 1: Barco de Teseo e identidad personal`;
-
-// STATE
+// ─── STATE ────────────────────────────────────────────────────────────────────
 let S = {
-  openConcept:null, openTutor:null, openPlanWeek:1,
-  modos:{barco:'libre',nietzsche:'libre',trauma:'libre'},
-  gIdx:{barco:0,nietzsche:0,trauma:0},
-  selTags:[],
-  chatHistories:{barco:[],nietzsche:[],trauma:[]},
-  data:{refs:{barco:[],nietzsche:[],trauma:[]},pregs:{barco:[],nietzsche:[],trauma:[]},cons:[],addedThemes:[]}
+  activeTab: 'conceptos',
+  openConcept: null,
+  openPlanWeek: 1,
+  openMaterial: {}, // {conceptId: materialIndex}
+  expandedMaterial: {}, // {conceptId_matIndex: true}
+  answeredQ: {}, // {conceptId: [0,2]} — índices de preguntas respondidas
+  socOpen: {}, // {conceptId: true}
+  chatHistories: {},
+  selTags: [],
+  data: {
+    refs: { barco: [], nietzsche: [], trauma: [] },
+    pregs: { barco: [], nietzsche: [], trauma: [] },
+    cons: [],
+    addedThemes: [],
+    phases: {},
+    sintesis: {}
+  }
 };
 
 let apiKey = '';
 
-// ── STORAGE ──
-async function load() {
-  try {
-    const r = await window.storage.get('dfm-v4');
-    if (r && r.value) S.data = JSON.parse(r.value);
-    else { S.data.refs = JSON.parse(JSON.stringify(INIT_REFS)); S.data.pregs = JSON.parse(JSON.stringify(INIT_PREGS)); await save(); }
-  } catch(e) { S.data.refs = JSON.parse(JSON.stringify(INIT_REFS)); S.data.pregs = JSON.parse(JSON.stringify(INIT_PREGS)); }
-  try { apiKey = localStorage.getItem('manu-apikey') || ''; } catch(e){}
-  updateKeyUI();
-  renderConceptos(); renderPlan();
+// ─── STORAGE ──────────────────────────────────────────────────────────────────
+function save() {
+  localStorage.setItem('diario-v3', JSON.stringify(S.data));
+  localStorage.setItem('diario-chats-v3', JSON.stringify(S.chatHistories));
+  localStorage.setItem('diario-qans-v3', JSON.stringify(S.answeredQ));
+}
+// Helper: compute phase completion for a concept
+function getPhases(id) {
+  const c = CONCEPTS.find(x=>x.id===id);
+  const refs = S.data.refs[id]||[];
+  const answered = S.answeredQ[id]||[];
+  const hist = S.chatHistories[id]||[];
+  const realMsgs = hist.filter(m=>m.content!=='__thinking__').length;
+  const p = S.data.phases[id]||{};
+  return {
+    leer:    !!(p.leer    || (S.expandedMaterial[id+'_0']||S.expandedMaterial[id+'_1']||S.expandedMaterial[id+'_2'])),
+    responder: !!(p.responder || answered.length >= 2),
+    profundizar: !!(p.profundizar || realMsgs >= 6),
+    sintetizar: !!(S.data.sintesis[id])
+  };
+}
+function isSealed(id) {
+  const p = getPhases(id);
+  return p.leer && p.responder && p.profundizar && p.sintetizar;
+}
+function load() {
+  try { const d = localStorage.getItem('diario-v3'); if(d) S.data = {...S.data, ...JSON.parse(d)}; } catch(e){}
+  try { const c = localStorage.getItem('diario-chats-v3'); if(c) S.chatHistories = JSON.parse(c); } catch(e){}
+  try { const q = localStorage.getItem('diario-qans-v3'); if(q) S.answeredQ = JSON.parse(q); } catch(e){}
+  apiKey = localStorage.getItem('diario-key') || '';
+  updateKeyDot();
+  renderAll();
 }
 
-async function save() {
-  try { await window.storage.set('dfm-v4', JSON.stringify(S.data)); } catch(e){}
-}
-
-// ── TOAST ──
-let TT;
-function toast(msg) {
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(TT); TT=setTimeout(()=>el.classList.remove('show'),2200);
-}
-
-// ── API KEY ──
-function updateKeyUI() {
-  const dot=document.getElementById('key-dot');
-  const lbl=document.getElementById('key-label');
-  if (apiKey) { dot.classList.add('on'); lbl.textContent='Tutor ✦'; }
-  else { dot.classList.remove('on'); lbl.textContent='API'; }
-}
-
-function openKeyModal() {
-  document.getElementById('key-modal').style.display='flex';
-  document.getElementById('key-remove-wrap').style.display = apiKey ? 'block' : 'none';
-}
-
-function closeKeyModal(e) {
-  if (!e || e.target===document.getElementById('key-modal'))
-    document.getElementById('key-modal').style.display='none';
-}
-
-function saveKey() {
-  const k=document.getElementById('key-input').value.trim();
-  if (!k.startsWith('sk-ant-')) { toast('La key debe empezar con sk-ant-...'); return; }
-  try { localStorage.setItem('manu-apikey',k); } catch(e){}
-  apiKey=k; document.getElementById('key-input').value='';
-  document.getElementById('key-modal').style.display='none';
-  updateKeyUI(); renderConceptos(); toast('Tutor activado ✓');
-}
-
-function removeKey() {
-  if (!confirm('¿Eliminar la API key?')) return;
-  try { localStorage.removeItem('manu-apikey'); } catch(e){}
-  apiKey=''; document.getElementById('key-modal').style.display='none';
-  updateKeyUI(); renderConceptos(); toast('API key eliminada');
-}
-
-// ── TABS ──
-function showTab(t) {
-  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
-  ['conceptos','conexiones','pendientes','plan','temas'].forEach((n,i)=>{
-    if(n===t) document.querySelectorAll('.nav-tab')[i].classList.add('active');
+// ─── NAV ──────────────────────────────────────────────────────────────────────
+function switchTab(t) {
+  S.activeTab = t;
+  document.querySelectorAll('.nav-tab').forEach((el,i) => {
+    const tabs = ['conceptos','plan','conexiones','pendientes','temas'];
+    el.classList.toggle('active', tabs[i] === t);
   });
-  if(t==='conexiones') renderConexiones();
-  if(t==='pendientes') renderPendientes();
-  if(t==='plan') renderPlan();
-  if(t==='temas') renderTemas();
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
 }
 
-function h(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-// ── CONCEPTOS ──
-function toggleConcept(id) { S.openConcept=S.openConcept===id?null:id; renderConceptos(); }
-function toggleTutor(id,e) { if(e)e.stopPropagation(); S.openTutor=S.openTutor===id?null:id; renderConceptos(); if(S.openTutor===id) scrollToTutor(id); }
-
-function scrollToTutor(id) {
-  setTimeout(()=>{
-    const el=document.getElementById('tutor-msgs-'+id);
-    if(el) { el.scrollTop=el.scrollHeight; }
-  },100);
+// ─── API KEY ──────────────────────────────────────────────────────────────────
+function openKeyModal() {
+  document.getElementById('key-input').value = apiKey;
+  document.getElementById('key-modal').style.display = 'flex';
+}
+function closeKeyModalBg(e) { if(e.target.classList.contains('modal-overlay')) document.getElementById('key-modal').style.display='none'; }
+function saveKey() {
+  apiKey = document.getElementById('key-input').value.trim();
+  localStorage.setItem('diario-key', apiKey);
+  document.getElementById('key-modal').style.display='none';
+  updateKeyDot(); toast('Clave guardada ✓');
+}
+function clearKey() {
+  apiKey=''; localStorage.removeItem('diario-key');
+  document.getElementById('key-input').value='';
+  updateKeyDot(); toast('Clave borrada');
+}
+function updateKeyDot() {
+  document.getElementById('key-dot').classList.toggle('on', !!apiKey);
 }
 
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ─── ESCAPE HTML ─────────────────────────────────────────────────────────────
+function h(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ─── RENDER ALL ───────────────────────────────────────────────────────────────
+function renderAll() {
+  renderConceptos();
+  renderPlan();
+  renderConexiones();
+  renderPendientes();
+  renderTemas();
+}
+
+// ─── CONCEPTOS ────────────────────────────────────────────────────────────────
 function renderConceptos() {
-  document.getElementById('concept-grid').innerHTML = CONCEPTS.map((c,ci)=>{
-    const refs=S.data.refs[c.id]||[];
-    const pregs=S.data.pregs[c.id]||[];
-    const score=Math.min(refs.length+pregs.length,3);
-    const dots=[0,1,2].map(i=>`<div class="pdot ${i<score?'on':''}"></div>`).join('');
-    const isOpen=S.openConcept===c.id;
-    const isTutorOpen=S.openTutor===c.id;
-    const modo=S.modos[c.id];
-    const gIdx=S.gIdx[c.id];
-    const gqs=GUIDED[c.id];
+  document.getElementById('concepts-list').innerHTML = CONCEPTS.map(c => renderConceptCard(c)).join('');
+}
 
-    let body='';
-    if(isOpen) {
-      // Tutor section HTML
-      const chatMsgs=S.chatHistories[c.id]||[];
-      const hasKey=!!apiKey;
-      const tutorBody = isTutorOpen ? `<div class="tutor-body open" id="tutor-body-${c.id}">
-        ${!hasKey ? `<div class="tutor-no-key">
-          <div class="tutor-no-key-text">Activá el tutor con tu API key de Anthropic para chatear sobre tus reflexiones.</div>
-          <button class="btn btn-primary btn-sm" onclick="openKeyModal();event.stopPropagation()">Configurar API key</button>
-        </div>` : `
-        <div class="tutor-msgs" id="tutor-msgs-${c.id}">
-          ${chatMsgs.length===0?`<div style="text-align:center;padding:12px 0 4px;font-size:12px;color:var(--muted);font-style:italic">Preguntame sobre tus reflexiones, pedíme que las conecte con filósofos, o desafiame a encontrar contraejemplos.</div>`:''}
-          ${chatMsgs.map(m=>`<div class="msg msg-${m.role==='user'?'user':'ai'}">
-            <div class="msg-bubble">${formatMsg(m.content)}</div>
-          </div>`).join('')}
-        </div>
-        <div class="tutor-input-row" onclick="event.stopPropagation()">
-          <textarea id="tinput-${c.id}" placeholder="Escribí algo sobre este concepto..." rows="2" onkeydown="tutorKey(event,'${c.id}')"></textarea>
-          <button class="btn btn-primary tutor-send" onclick="sendTutor('${c.id}');event.stopPropagation()" id="tsend-${c.id}">↑</button>
-        </div>
-        <div class="quick-btns" onclick="event.stopPropagation()">
-          <div class="qbtn" onclick="quickSend('${c.id}','Conectá mis reflexiones con filósofos reales.')">Conectar con filósofos</div>
-          <div class="qbtn" onclick="quickSend('${c.id}','Desafiá mis ideas con una pregunta difícil.')">Desafiame</div>
-          <div class="qbtn" onclick="quickSend('${c.id}','¿Qué me falta profundizar sobre este tema?')">¿Qué me falta?</div>
-        </div>`}
-      </div>` : `<div class="tutor-body" id="tutor-body-${c.id}"></div>`;
+function renderConceptCard(c) {
+  const isOpen = S.openConcept === c.id;
+  const phases = getPhases(c.id);
+  const sealed = isSealed(c.id);
+  const phaseCount = Object.values(phases).filter(Boolean).length;
 
-      body=`<div class="concept-body open">
-        <div class="c-summary">${c.summary}</div>
-
-        <div class="sec">Mis reflexiones</div>
-        ${refs.length===0?'<div class="empty">Todavía no escribiste nada aquí.</div>':refs.map((r,i)=>`
-          <div class="ref-item ${r.fromChat?'from-chat':''}">
-            ${r.fromChat?`<div class="ref-label">${h(r.label||'De nuestra conversación')}</div>`:''}
-            ${h(r.texto)}
-            <div class="ref-date">${r.fecha}</div>
-            <button class="del" onclick="delRef('${c.id}',${i});event.stopPropagation()">×</button>
-          </div>`).join('')}
-
-        <div class="sec">Agregar reflexión</div>
-        <div class="modo-toggle">
-          <div class="modo-btn ${modo==='libre'?'active':''}" onclick="setModo('${c.id}','libre');event.stopPropagation()">Libre</div>
-          <div class="modo-btn ${modo==='guiada'?'active':''}" onclick="setModo('${c.id}','guiada');event.stopPropagation()">Guiada</div>
-        </div>
-        ${modo==='guiada'?`
-          <div class="guided-nav">
-            <span class="gcounter">${gIdx+1} / ${gqs.length}</span>
-            <div style="display:flex;gap:6px">
-              <button class="btn btn-ghost btn-sm" onclick="prevG('${c.id}');event.stopPropagation()">←</button>
-              <button class="btn btn-ghost btn-sm" onclick="nextG('${c.id}');event.stopPropagation()">→</button>
-            </div>
-          </div>
-          <div class="guided-q">${gqs[gIdx]}</div>`:''}
-        <div onclick="event.stopPropagation()">
-          <textarea id="ta-${c.id}" placeholder="${modo==='libre'?'Escribí lo que pensás...':'Tu respuesta...'}" rows="3"></textarea>
-          <button class="btn btn-primary" style="margin-top:8px" onclick="addRef('${c.id}');event.stopPropagation()">Guardar reflexión</button>
-        </div>
-
-        <div class="sec">Preguntas pendientes</div>
-        ${pregs.length===0?'<div class="empty">Sin preguntas pendientes.</div>':pregs.map((p,i)=>`
-          <div class="pend-item">
-            <div class="pcheck ${p.done?'done':''}" onclick="togglePreg('${c.id}',${i});event.stopPropagation()">${p.done?'✓':''}</div>
-            <div class="ptext ${p.done?'done':''}">${h(p.texto)}</div>
-          </div>`).join('')}
-
-        <div class="sec">Preguntas base</div>
-        ${c.preguntasBase.map(p=>`
-          <div class="pend-item">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--gold-light);flex-shrink:0;margin-top:6px"></div>
-            <div class="ptext" style="color:var(--muted);font-style:italic">${p}</div>
-          </div>`).join('')}
-        <div onclick="event.stopPropagation()" style="margin-top:10px">
-          <div class="input-row">
-            <input type="text" id="pi-${c.id}" placeholder="Agregar pregunta pendiente...">
-            <button class="btn btn-primary" onclick="addPreg('${c.id}');event.stopPropagation()">+</button>
-          </div>
-        </div>
-
-        <!-- TUTOR SECTION -->
-        <div class="tutor-section">
-          <div class="tutor-section-header" onclick="toggleTutor('${c.id}',event)">
-            <span class="tutor-spark">✦</span>
-            <span class="tutor-section-label ${hasKey?'has-key':''}">${hasKey?'Tutor · Preguntame sobre este concepto':'Tutor · Requiere API key'}</span>
-            <span style="font-size:11px;color:var(--border)">${isTutorOpen?'▲':'▼'}</span>
-          </div>
-          ${tutorBody}
-        </div>
-
-      </div>`;
-    }
-
-    return `<div class="concept-card" style="animation-delay:${ci*0.05}s">
-      <div class="concept-header" onclick="toggleConcept('${c.id}')">
-        <div class="concept-icon" style="background:${c.bg}">${c.icon}</div>
-        <div class="concept-meta">
-          <div class="concept-name">${c.name}</div>
-          <div class="concept-phase">${c.phase}</div>
-          <div class="pdots">${dots}</div>
-        </div>
-        <div class="chev ${isOpen?'open':''}">▼</div>
-      </div>${body}</div>`;
+  const PHASE_DEFS = [
+    {key:'leer',      icon:'📖', name:'Leer'},
+    {key:'responder', icon:'✍️',  name:'Responder'},
+    {key:'profundizar',icon:'🧠', name:'Profundizar'},
+    {key:'sintetizar',icon:'✦',  name:'Sintetizar'},
+  ];
+  const phaseBar = PHASE_DEFS.map(p => {
+    const done = phases[p.key];
+    const active = !done && Object.values(phases).filter(Boolean).length === PHASE_DEFS.indexOf(p);
+    return `<div class="phase-step ${done?'done':active?'active':''}">
+      <span class="phase-icon">${p.icon}</span>
+      <span class="phase-name">${done?'✓ ':''} ${p.name}</span>
+    </div>`;
   }).join('');
 
-  // Scroll tutor msgs to bottom after render
-  CONCEPTS.forEach(c=>{
-    if(S.openTutor===c.id) {
-      const el=document.getElementById('tutor-msgs-'+c.id);
-      if(el) el.scrollTop=el.scrollHeight;
-    }
-  });
+  let body = '';
+  if (isOpen) {
+    const showSintesis = phases.leer && phases.responder && phases.profundizar;
+    body = `<div class="concept-body open">
+      <div class="phase-bar">${phaseBar}</div>
+      ${renderMaterials(c)}
+      ${renderBaseQuestions(c)}
+      ${renderReflexiones(c)}
+      ${renderSocraticConversation(c)}
+      ${showSintesis ? renderSintesis(c) : ''}
+    </div>`;
+  } else {
+    body = `<div class="concept-body"></div>`;
+  }
+
+  return `<div class="concept-card ${sealed?'sealed':''}">
+    <div class="concept-header" onclick="toggleConcept('${c.id}')">
+      <div class="concept-icon" style="background:${c.bg}">${c.icon}</div>
+      <div class="concept-meta">
+        <div class="concept-name">${c.name}</div>
+        <div class="concept-phase">${c.phase}</div>
+        ${sealed
+          ? `<div class="sealed-badge">✓ Completado</div>`
+          : `<div class="pdots">${Array.from({length:4},(_,i)=>`<div class="pdot ${i<phaseCount?'on':''}"></div>`).join('')}</div>`
+        }
+      </div>
+      <div class="chev ${isOpen?'open':''}">▾</div>
+    </div>
+    ${body}
+  </div>`;
 }
 
-function formatMsg(txt) {
-  return h(txt)
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+function toggleConcept(id) {
+  S.openConcept = S.openConcept === id ? null : id;
+  renderConceptos();
+  if (S.openConcept) {
+    setTimeout(() => {
+      const card = document.querySelector(`.concept-card:has([onclick="toggleConcept('${id}')"])`);
+      if (card) card.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+}
+
+// ─── MATERIALES DEL PLAN ──────────────────────────────────────────────────────
+function renderMaterials(c) {
+  const mats = c.planMaterials;
+  if (!mats || !mats.length) return '';
+
+  const openIdx = S.openMaterial[c.id] ?? 0;
+
+  const tabs = mats.map((m, i) => {
+    const isActive = openIdx === i;
+    return `<div onclick="setMaterial('${c.id}',${i})" style="
+      padding:6px 10px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; font-weight:500;
+      cursor:pointer; border-bottom:2px solid ${isActive?'var(--gold)':'transparent'};
+      color:${isActive?'var(--gold)':'var(--muted)'}; white-space:nowrap; user-select:none;
+    ">${m.day}</div>`;
+  }).join('');
+
+  const mat = mats[openIdx];
+  const expKey = c.id+'_'+openIdx;
+  const isExpanded = S.expandedMaterial[expKey];
+
+  let contentHtml = '';
+  if (mat.content) {
+    contentHtml = isExpanded
+      ? `<div class="plan-text-expanded">${h(mat.content)}</div>`
+      : `<button class="plan-expand-btn" onclick="toggleMaterialText('${c.id}',${openIdx})">📖 Abrir material</button>`;
+  } else {
+    contentHtml = `<div style="font-size:12px;color:var(--muted);font-style:italic">Usá el espacio de reflexión de abajo para escribir sobre esto.</div>`;
+  }
+
+  if (isExpanded && mat.content) {
+    contentHtml = `<button class="plan-expand-btn" onclick="toggleMaterialText('${c.id}',${openIdx})" style="margin-bottom:10px">▲ Cerrar</button>
+      <div class="plan-text-expanded">${h(mat.content)}</div>`;
+  }
+
+  return `<div class="cb-section">
+    <div class="sec-label">Material del plan</div>
+    <div style="display:flex;overflow-x:auto;gap:0;border-bottom:0.5px solid var(--border-light);margin-bottom:12px;scrollbar-width:none">${tabs}</div>
+    <div class="plan-material">
+      <div class="plan-day-tag">${mat.day}</div>
+      <div class="plan-activity-title">${mat.title}</div>
+      <div class="plan-activity-sub">${mat.subtitle}</div>
+      ${contentHtml}
+    </div>
+  </div>`;
+}
+
+function setMaterial(id, idx) {
+  S.openMaterial[id] = idx;
+  renderConceptos();
+}
+
+function toggleMaterialText(id, idx) {
+  const key = id+'_'+idx;
+  S.expandedMaterial[key] = !S.expandedMaterial[key];
+  if (S.expandedMaterial[key]) {
+    if (!S.data.phases[id]) S.data.phases[id] = {};
+    S.data.phases[id].leer = true;
+    save();
+  }
+  renderConceptos();
+}
+
+// ─── PREGUNTAS BASE ───────────────────────────────────────────────────────────
+function renderBaseQuestions(c) {
+  const answered = S.answeredQ[c.id] || [];
+  const qs = c.baseQuestions;
+
+  const qHtml = qs.map((q, i) => {
+    const isAnswered = answered.includes(i);
+    return `<div class="base-q ${isAnswered?'base-q-answered':''}" onclick="useBaseQuestion('${c.id}',${i})">
+      <span class="base-q-num">${isAnswered?'✓':String(i+1).padStart(2,'0')}</span>
+      <span>${q}</span>
+    </div>`;
+  }).join('');
+
+  return `<div class="cb-section" style="padding-bottom:16px">
+    <div class="sec-label">Preguntas para pensar</div>
+    <div class="base-questions">${qHtml}</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px">Tocá una para llevarla a la conversación ↓</div>
+  </div>`;
+}
+
+function useBaseQuestion(id, qIdx) {
+  // Mark as used
+  if (!S.answeredQ[id]) S.answeredQ[id] = [];
+  if (!S.answeredQ[id].includes(qIdx)) S.answeredQ[id].push(qIdx);
+  // Mark responder phase when >= 2 questions engaged
+  if (S.answeredQ[id].length >= 2) {
+    if (!S.data.phases[id]) S.data.phases[id] = {};
+    S.data.phases[id].responder = true;
+  }
+  // Open socratic section and pre-fill
+  S.socOpen[id] = true;
+  save();
+  renderConceptos();
+  // Fill textarea
+  setTimeout(() => {
+    const ta = document.getElementById('chat-input-'+id);
+    if (ta) {
+      const concept = CONCEPTS.find(c=>c.id===id);
+      ta.value = concept.baseQuestions[qIdx];
+      ta.focus();
+    }
+  }, 100);
+}
+
+// ─── REFLEXIONES ─────────────────────────────────────────────────────────────
+function renderReflexiones(c) {
+  const refs = S.data.refs[c.id] || [];
+  const refsHtml = refs.length === 0
+    ? `<div class="empty" style="padding:12px 0">Todavía no escribiste reflexiones sobre este tema.</div>`
+    : refs.map((r,i) => `<div class="ref-item ${r.fromChat?'from-chat':''}">
+        <button class="del" onclick="delRef('${c.id}',${i})">×</button>
+        ${r.fromChat?'<div class="ref-label">De la conversación</div>':''}
+        ${h(r.texto)}
+        <div class="ref-date">${r.fecha}</div>
+      </div>`).join('');
+
+  return `<div class="cb-section" style="padding-bottom:16px">
+    <div class="sec-label">Mis reflexiones</div>
+    ${refsHtml}
+    <textarea id="ref-input-${c.id}" placeholder="Escribí lo que pensás sobre esto..." style="margin-top:8px" rows="3"></textarea>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <button class="btn btn-primary btn-sm" onclick="addRef('${c.id}')">Guardar reflexión</button>
+      <button class="btn btn-ghost btn-sm" onclick="addPregDesdeConcept('${c.id}')">+ Pregunta pendiente</button>
+    </div>
+  </div>`;
+}
+
+function addRef(id) {
+  const el = document.getElementById('ref-input-'+id);
+  const txt = el.value.trim();
+  if (!txt) return;
+  const now = new Date();
+  const fecha = now.toLocaleDateString('es-AR',{day:'numeric',month:'short'});
+  S.data.refs[id].push({texto:txt, fecha, fromChat:false});
+  save(); el.value='';
+  renderConceptos();
+  toast('Reflexión guardada ✓');
+}
+
+function delRef(id, i) {
+  S.data.refs[id].splice(i,1);
+  save(); renderConceptos();
+}
+
+function addPregDesdeConcept(id) {
+  const el = document.getElementById('ref-input-'+id);
+  const txt = el.value.trim();
+  if (!txt) { toast('Escribí la pregunta arriba primero'); return; }
+  S.data.pregs[id].push({texto:txt, done:false});
+  save(); el.value='';
+  renderPendientes();
+  toast('Pregunta guardada en Pendientes ✓');
+}
+
+// ─── CONVERSACIÓN SOCRÁTICA ───────────────────────────────────────────────────
+function renderSocraticConversation(c) {
+  const isOpen = !!S.socOpen[c.id];
+  const hasKey = !!apiKey;
+  const hist = S.chatHistories[c.id] || [];
+
+  const msgs = hist.map(m => {
+    if (m.role === 'user') {
+      return `<div class="msg msg-user"><div class="bubble bubble-user">${h(m.content)}</div></div>`;
+    } else {
+      const txt = m.content === '__thinking__'
+        ? `<div class="bubble bubble-thinking">Claude está pensando...</div>`
+        : `<div class="bubble bubble-ai">${renderMarkdown(m.content)}</div>`;
+      return `<div class="msg msg-ai">${txt}</div>`;
+    }
+  }).join('');
+
+  // Quick send suggestions based on last AI message
+  const lastAI = [...hist].reverse().find(m=>m.role==='assistant' && m.content!=='__thinking__');
+  const quickPills = hist.length === 0 ? `
+    <div class="quick-pills">
+      <div class="qpill" onclick="quickSend('${c.id}','Empecemos. ¿Por dónde arrancamos?')">Empecemos →</div>
+      <div class="qpill" onclick="quickSend('${c.id}','Tengo una duda sobre el tema')">Tengo una duda</div>
+    </div>` : '';
+
+  const noKeyMsg = !hasKey
+    ? `<div style="background:var(--gold-pale);border:0.5px solid var(--gold-light);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted);margin-bottom:10px">Necesitás agregar tu API key de Claude para usar esta sección. <span style="color:var(--gold);cursor:pointer;font-weight:500" onclick="openKeyModal()">Agregar clave →</span></div>`
+    : '';
+
+  // Count real exchanges (pairs of user+ai)
+  const realMsgs = hist.filter(m=>m.content!=='__thinking__').length;
+  const exchanges = Math.floor(realMsgs / 2);
+  const MAX_EXCHANGES = 8;
+  const limitReached = exchanges >= MAX_EXCHANGES;
+  const phases = getPhases(c.id);
+
+  let limitBanner = '';
+  if (limitReached && !phases.profundizar) {
+    limitBanner = `<div class="chat-limit-warn">
+      <strong>Llegaste a un buen punto de cierre.</strong> Tuviste 8 intercambios sobre este tema. Guardá las ideas que te resonaron y pasá a sintetizar tu posición abajo.
+    </div>`;
+  } else if (exchanges >= 5 && !limitReached) {
+    limitBanner = `<div class="chat-limit-warn" style="background:rgba(201,168,76,0.04)">
+      Llevas ${exchanges} intercambios · quedan ${MAX_EXCHANGES - exchanges} antes del cierre
+    </div>`;
+  }
+
+  const inputDisabled = !hasKey || limitReached;
+
+  return `<div class="socratic-section">
+    <div class="socratic-header ${isOpen?'open':''}" onclick="toggleSocratic('${c.id}')">
+      <span class="soc-icon">🧠</span>
+      <span class="soc-label ${hasKey?'active':''}">Profundizar · Conversación socrática${exchanges > 0 ? ' · '+exchanges+'/'+MAX_EXCHANGES : ''}</span>
+      <span class="soc-chev ${isOpen?'open':''}">▾</span>
+    </div>
+    <div class="socratic-body ${isOpen?'open':''}">
+      ${noKeyMsg}
+      ${limitBanner}
+      <div class="chat-msgs" id="msgs-${c.id}">${msgs}</div>
+      ${quickPills}
+      ${!inputDisabled ? `<div class="chat-input-row">
+        <textarea class="chat-input" id="chat-input-${c.id}" placeholder="Escribí tu reflexión o pregunta..." rows="2"></textarea>
+        <button class="send-btn" id="send-btn-${c.id}" onclick="sendMsg('${c.id}')">↑</button>
+      </div>` : limitReached ? `<div style="text-align:center;padding:8px 0"><span style="font-size:12px;color:var(--muted);cursor:pointer" onclick="clearChat('${c.id}')">Reiniciar conversación</span></div>` : ''}
+      ${hist.length > 0 ? `<div class="save-from-chat">
+        <span class="save-chip" onclick="saveLastAIMsg('${c.id}')">💾 Guardar como reflexión</span>
+        <span style="font-size:11px;color:var(--muted)">Guardá las ideas que te resuenen</span>
+      </div>` : ''}
+    </div>
+  </div>`;
+}
+
+function toggleSocratic(id) {
+  S.socOpen[id] = !S.socOpen[id];
+  renderConceptos();
+  if (S.socOpen[id]) {
+    setTimeout(() => {
+      const msgs = document.getElementById('msgs-'+id);
+      if (msgs) msgs.scrollTop = msgs.scrollHeight;
+    }, 100);
+  }
+}
+
+function quickSend(id, text) {
+  const ta = document.getElementById('chat-input-'+id);
+  if (ta) { ta.value = text; sendMsg(id); }
+}
+
+function clearChat(id) {
+  S.chatHistories[id] = [];
+  save(); renderConceptos();
+}
+
+function saveLastAIMsg(id) {
+  const hist = S.chatHistories[id] || [];
+  const lastAI = [...hist].reverse().find(m=>m.role==='assistant' && m.content!=='__thinking__');
+  if (!lastAI) return;
+  const now = new Date();
+  S.data.refs[id].push({
+    texto: lastAI.content,
+    fecha: now.toLocaleDateString('es-AR',{day:'numeric',month:'short'}),
+    fromChat: true
+  });
+  save(); renderConceptos();
+  toast('Guardado en tus reflexiones ✓');
+}
+
+function renderMarkdown(txt) {
+  return txt
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>')
     .replace(/\n/g,'<br>');
 }
 
-function setModo(id,m){S.modos[id]=m;renderConceptos();}
-function nextG(id){S.gIdx[id]=(S.gIdx[id]+1)%GUIDED[id].length;renderConceptos();}
-function prevG(id){const l=GUIDED[id].length;S.gIdx[id]=(S.gIdx[id]-1+l)%l;renderConceptos();}
+async function sendMsg(id) {
+  const ta = document.getElementById('chat-input-'+id);
+  const btn = document.getElementById('send-btn-'+id);
+  const text = ta.value.trim();
+  if (!text || !apiKey) return;
 
-function addRef(id){
-  const el=document.getElementById('ta-'+id);const txt=el.value.trim();if(!txt)return;
-  const f=new Date().toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'});
-  S.data.refs[id].push({texto:txt,fecha:f});save();el.value='';renderConceptos();toast('Reflexión guardada ✓');
-}
-function delRef(id,i){S.data.refs[id].splice(i,1);save();renderConceptos();}
-function addPreg(id){
-  const el=document.getElementById('pi-'+id);const txt=el.value.trim();if(!txt)return;
-  S.data.pregs[id].push({texto:txt,done:false});save();el.value='';renderConceptos();toast('Pregunta guardada ✓');
-}
-function togglePreg(id,i){S.data.pregs[id][i].done=!S.data.pregs[id][i].done;save();renderConceptos();}
+  if (!S.chatHistories[id]) S.chatHistories[id] = [];
 
-// ── TUTOR CHAT ──
-function tutorKey(e,id){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendTutor(id);}}
-function quickSend(id,msg){if(!apiKey){openKeyModal();return;}doTutorSend(id,msg);}
-
-async function sendTutor(id){
-  if(!apiKey){openKeyModal();return;}
-  const el=document.getElementById('tinput-'+id);
-  const txt=el.value.trim();if(!txt)return;
-  el.value='';
-  await doTutorSend(id,txt);
-}
-
-async function doTutorSend(id,txt){
-  const btn=document.getElementById('tsend-'+id);
+  ta.value = '';
+  S.chatHistories[id].push({role:'user', content:text});
+  S.chatHistories[id].push({role:'assistant', content:'__thinking__'});
   if(btn) btn.disabled=true;
-
-  S.chatHistories[id].push({role:'user',content:txt});
-
-  // Add thinking placeholder
-  const thinkId='think-'+Date.now();
-  S.chatHistories[id].push({role:'assistant',content:'__thinking__',_id:thinkId});
   renderConceptos();
 
-  // Build context from refs on first message
-  let messages=[...S.chatHistories[id].filter(m=>m.content!=='__thinking__')];
-  if(messages.length===1){
-    const refs=S.data.refs[id]||[];
-    const cons=S.data.cons||[];
-    let ctx='';
-    if(refs.length){
-      ctx+=`Reflexiones de Manu sobre "${CONCEPTS.find(c=>c.id===id).name}":\n`;
-      refs.forEach(r=>{ctx+=`- ${r.texto}\n`;});
-    }
-    if(cons.length){
-      ctx+=`\nConexiones que identificó entre conceptos:\n`;
-      cons.forEach(c=>{ctx+=`- ${c.texto}\n`;});
-    }
-    if(ctx) messages=[{role:'user',content:ctx+'\n\n---\n\n'+txt}];
+  setTimeout(() => {
+    const msgs = document.getElementById('msgs-'+id);
+    if(msgs) msgs.scrollTop=msgs.scrollHeight;
+  }, 50);
+
+  const concept = CONCEPTS.find(c=>c.id===id);
+
+  // Build context with refs
+  const userRefs = (S.data.refs[id]||[]).filter(r=>!r.fromChat);
+  let systemPrompt = concept.socraticSystem;
+  if (userRefs.length) {
+    systemPrompt += `\n\nReflexiones previas de Manu sobre este tema:\n${userRefs.map(r=>'- '+r.texto).join('\n')}`;
   }
+
+  const messages = S.chatHistories[id]
+    .filter(m=>m.content!=='__thinking__')
+    .map(m=>({role:m.role, content:m.content}));
 
   try {
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:SYSTEM_PROMPT,messages})
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':apiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:600,
+        system:systemPrompt,
+        messages
+      })
     });
-    const data=await res.json();
-    // Remove thinking
-    S.chatHistories[id]=S.chatHistories[id].filter(m=>m.content!=='__thinking__');
-    if(data.error){
-      S.chatHistories[id].push({role:'assistant',content:`*Error:* ${data.error.message}`});
-      S.chatHistories[id]=S.chatHistories[id].filter((_,i)=>i!==S.chatHistories[id].length-2);
+    const data = await res.json();
+    S.chatHistories[id] = S.chatHistories[id].filter(m=>m.content!=='__thinking__');
+    if (data.error) {
+      S.chatHistories[id].push({role:'assistant', content:`*Error:* ${data.error.message}`});
     } else {
-      S.chatHistories[id].push({role:'assistant',content:data.content[0].text});
+      S.chatHistories[id].push({role:'assistant', content:data.content[0].text});
     }
-  } catch(e){
-    S.chatHistories[id]=S.chatHistories[id].filter(m=>m.content!=='__thinking__');
-    S.chatHistories[id].push({role:'assistant',content:'*Hubo un error de conexión. Verificá tu API key.*'});
+  } catch(e) {
+    S.chatHistories[id] = S.chatHistories[id].filter(m=>m.content!=='__thinking__');
+    S.chatHistories[id].push({role:'assistant', content:'*Hubo un error de conexión. Verificá tu API key.*'});
   }
 
-  renderConceptos();
+  save();
   if(btn) btn.disabled=false;
+  renderConceptos();
+  setTimeout(() => {
+    const msgs = document.getElementById('msgs-'+id);
+    if(msgs) msgs.scrollTop=msgs.scrollHeight;
+  }, 50);
 }
 
-// ── CONEXIONES ──
-function renderConexiones(){
-  const names={barco:'Barco de Teseo',nietzsche:'Nietzsche',trauma:'Trauma colectivo'};
-  document.getElementById('con-list').innerHTML=S.data.cons.length===0?'<div class="empty">Todavía no registraste conexiones.</div>':
-    S.data.cons.map((c,i)=>`<div class="con-item">
-      <button class="del" onclick="delCon(${i})">×</button>
-      ${h(c.texto)}
-      <div class="con-tags">${(c.tags||[]).map(t=>`<span class="con-tag">${t}</span>`).join('')}</div>
-    </div>`).join('');
-  document.getElementById('tag-pills').innerHTML=Object.entries(names).map(([k,v])=>
+// ─── SÍNTESIS FINAL ───────────────────────────────────────────────────────────
+function renderSintesis(c) {
+  const saved = S.data.sintesis[c.id];
+  if (saved) {
+    return `<div class="sintesis-section">
+      <div class="sintesis-header">
+        <div class="sintesis-title">Tu posición sobre este tema</div>
+        <div class="sintesis-sub">Esto queda como tu síntesis del ciclo. Podés editarla cuando quieras.</div>
+      </div>
+      <div class="sintesis-saved">
+        ${h(saved.texto)}
+        <div class="sintesis-date">${saved.fecha} · <span style="cursor:pointer;color:var(--gold)" onclick="editSintesis('${c.id}')">Editar</span></div>
+      </div>
+    </div>`;
+  }
+
+  return `<div class="sintesis-section">
+    <div class="sintesis-header">
+      <div class="sintesis-title">✦ Momento de sintetizar</div>
+      <div class="sintesis-sub">Llegaste a la última fase. Escribí tu posición sobre este tema en 2–3 oraciones. No tiene que ser perfecta, tiene que ser tuya.</div>
+    </div>
+    <div style="padding:0 16px 16px">
+      <textarea id="sint-input-${c.id}" placeholder="Después de todo esto, lo que creo es..." rows="4" style="margin-bottom:10px"></textarea>
+      <button class="btn btn-primary" style="width:100%" onclick="saveSintesis('${c.id}')">Guardar y cerrar el tema</button>
+    </div>
+  </div>`;
+}
+
+function saveSintesis(id) {
+  const el = document.getElementById('sint-input-'+id);
+  const txt = el ? el.value.trim() : '';
+  if (!txt) { toast('Escribí algo primero'); return; }
+  const now = new Date();
+  S.data.sintesis[id] = {
+    texto: txt,
+    fecha: now.toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'})
+  };
+  if (!S.data.phases[id]) S.data.phases[id] = {};
+  S.data.phases[id].sintetizar = true;
+  save();
+  renderConceptos();
+  toast('Tema completado ✓');
+}
+
+function editSintesis(id) {
+  S.data.sintesis[id] = null;
+  save(); renderConceptos();
+}
+
+// ─── CONEXIONES ───────────────────────────────────────────────────────────────
+function renderConexiones() {
+  const names = {barco:'Barco de Teseo',nietzsche:'Nietzsche',trauma:'Trauma colectivo'};
+  document.getElementById('con-list').innerHTML = S.data.cons.length===0
+    ? '<div class="empty">Todavía no registraste conexiones.</div>'
+    : S.data.cons.map((c,i)=>`<div class="con-item">
+        <button class="del" onclick="delCon(${i})">×</button>
+        ${h(c.texto)}
+        <div class="con-tags">${(c.tags||[]).map(t=>`<span class="con-tag">${t}</span>`).join('')}</div>
+      </div>`).join('');
+  document.getElementById('tag-pills').innerHTML = Object.entries(names).map(([k,v])=>
     `<div class="tag-pill ${S.selTags.includes(k)?'active':''}" onclick="toggleTag('${k}')">${v}</div>`).join('');
 }
 function toggleTag(t){const i=S.selTags.indexOf(t);i===-1?S.selTags.push(t):S.selTags.splice(i,1);renderConexiones();}
@@ -683,7 +1222,7 @@ function addCon(){
 }
 function delCon(i){S.data.cons.splice(i,1);save();renderConexiones();}
 
-// ── PENDIENTES ──
+// ─── PENDIENTES ───────────────────────────────────────────────────────────────
 function renderPendientes(){
   const names={barco:'Barco de Teseo',nietzsche:'Nietzsche',trauma:'Trauma colectivo'};
   let html='';let total=0;
@@ -704,7 +1243,7 @@ function addPregGlobal(){
   S.data.pregs[sel.value].push({texto:txt,done:false});save();el.value='';renderPendientes();toast('Pregunta agregada ✓');
 }
 
-// ── PLAN ──
+// ─── PLAN ─────────────────────────────────────────────────────────────────────
 function renderPlan(){
   const tc={c:'ptag-c',l:'ptag-l',r:'ptag-r',j:'ptag-j'};
   document.getElementById('plan-cont').innerHTML=PLAN.map(w=>`
@@ -724,7 +1263,7 @@ function renderPlan(){
 }
 function togglePlan(n){S.openPlanWeek=S.openPlanWeek===n?null:n;renderPlan();}
 
-// ── TEMAS ──
+// ─── TEMAS ────────────────────────────────────────────────────────────────────
 function renderTemas(){
   const totalRefs=CONCEPTS.reduce((s,c)=>s+(S.data.refs[c.id]||[]).filter(r=>!r.fromChat).length,0);
   const unlocked=totalRefs>=3;
